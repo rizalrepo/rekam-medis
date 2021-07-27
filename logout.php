@@ -3,7 +3,7 @@
 session_start();
 
 unset($_SESSION["id_user"]);
-unset($_SESSION["id_pelapor"]);
+// unset($_SESSION["id_pelapor"]);
 unset($_SESSION["level"]);
 // unset($_SESSION["nm_user"]);
 // unset($_SESSION["nm_pelapor"]);

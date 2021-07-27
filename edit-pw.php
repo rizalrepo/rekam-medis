@@ -197,7 +197,7 @@ if (isset($_POST['submit'])) {
                 });     
             },10);  
             window.setTimeout(function(){ 
-                window.location.replace('../logout');
+                window.location.replace('logout');
             } ,2000);   
         </script>";
     }
