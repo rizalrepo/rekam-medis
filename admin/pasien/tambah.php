@@ -8,6 +8,15 @@ $jk = [
     'Laki-laki' => 'Laki-laki',
     'Perempuan' => 'Perempuan',
 ];
+
+$query = mysqli_query($con, "SELECT max(no_kartu) as kode FROM pasien");
+$data = mysqli_fetch_array($query);
+$kode = $data['kode'];
+
+$urutan = (int) substr($kode, 7, 7);
+$urutan++;
+$huruf = "NKP";
+$kode = $huruf . sprintf("%07s", $urutan);
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -39,9 +48,21 @@ $jk = [
                         <div class="card-body" style="background-color: white;">
                             <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Nomor Kartu Pasien</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="no_kartu" value="<?= $kode ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Pasien</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="nm_pasien" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">NIK</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" name="nik" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -88,6 +109,12 @@ $jk = [
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Poli</label>
+                                    <div class="col-sm-10">
+                                        <?= cmb_dinamis('id_poli', 'poli', 'nm_poli', 'id_poli', '', 'required') ?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">No. HP</label>
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="hp" required>
@@ -129,7 +156,9 @@ include_once '../../template/footer.php';
 </script>
 <?php
 if (isset($_POST['submit'])) {
+    $no_kartu = $_POST['no_kartu'];
     $nm_pasien = $_POST['nm_pasien'];
+    $nik = $_POST['nik'];
     $jk = $_POST['jk'];
     $tmpt_lahir = $_POST['tmpt_lahir'];
     $tgl_lahir = $_POST['tgl_lahir'];
@@ -137,13 +166,16 @@ if (isset($_POST['submit'])) {
     $alamat = $_POST['alamat'];
     $jp = $_POST['jp'];
     $bpjs = $_POST['bpjs'];
+    $id_poli = $_POST['id_poli'];
     $hp = $_POST['hp'];
     $user = $_SESSION['id_user'];
     $today = date('Y-m-d');
 
     $tambah = $con->query("INSERT INTO pasien VALUES (
         '', 
+        '$no_kartu', 
         '$nm_pasien', 
+        '$nik', 
         '$jk',
         '$tmpt_lahir',
         '$tgl_lahir',
@@ -151,6 +183,7 @@ if (isset($_POST['submit'])) {
         '$alamat',
         '$jp',
         '$bpjs',
+        '$id_poli',
         '$hp',
         '$user',
         '$today'

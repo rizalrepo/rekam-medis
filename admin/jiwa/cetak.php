@@ -30,7 +30,7 @@ if (isset($_POST['cetak'])) {
 }
 
 require_once '../../assets/vendor/autoload.php';
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'LEGAL-L']);
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [380, 220]]);
 ob_start();
 ?>
 
@@ -83,6 +83,7 @@ ob_start();
                         <tr bgcolor="#007BFF" align="center">
                             <th>No</th>
                             <th>Nama Pasien</th>
+                            <th>Nomor Kartu</th>
                             <th>Jenis Kelamin</th>
                             <th>Usia</th>
                             <th>Untuk Keperluan</th>
@@ -102,10 +103,11 @@ ob_start();
                             <tr>
                                 <td align="center" width="5%"><?= $no++; ?></td>
                                 <td><?= $data['nm_pasien'] ?></td>
+                                <td align="center"><?= $data['no_kartu'] ?></td>
                                 <td align="center"><?= $data['jk'] ?></td>
                                 <td align="center"><?= $y . ' Tahun' ?></td>
                                 <td><?= $data['untuk'] ?></td>
-                                <td><?= tgl_indo($data['tanggal']) ?></td>
+                                <td align="center"><?= tgl_indo($data['tanggal']) ?></td>
                                 <td><?= $data['rohani'] ?></td>
                                 <td><?= $data['psikolog'] ?></td>
                                 <td><?= $data['catatan'] ?></td>

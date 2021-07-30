@@ -32,8 +32,12 @@ if (mysqli_connect_errno()) {
                                 </dl>
                                 <hr>
                                 <dl class="row">
+                                    <dt class="col-sm-3">Nomor Kartu</dt>
+                                    <dd class="col-sm-9">: <?= $d['no_kartu'] ?></dd>
                                     <dt class="col-sm-3">Nama Pasien</dt>
                                     <dd class="col-sm-9">: <?= $d['nm_pasien'] ?></dd>
+                                    <dt class="col-sm-3">NIK</dt>
+                                    <dd class="col-sm-9">: <?= $d['nik'] ?></dd>
                                     <dt class="col-sm-3">Jenis Kelamin</dt>
                                     <dd class="col-sm-9">: <?= $d['jk'] ?></dd>
                                     <dt class="col-sm-3">TTL</dt>
@@ -73,8 +77,9 @@ if (mysqli_connect_errno()) {
                                                 <th>No.</th>
                                                 <th>Nama Obat</th>
                                                 <th>Kekuatan</th>
-                                                <th>Jumlah</th>
+                                                <th>Jumlah (Pcs)</th>
                                                 <th>Dosis</th>
+                                                <th>Aturan Pakai</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -88,6 +93,7 @@ if (mysqli_connect_errno()) {
                                                     <td align="center"><?= $tampil['kekuatan'] ?></td>
                                                     <td align="center"><?= $tampil['jumlah'] ?></td>
                                                     <td align="center"><?= $tampil['dosis'] ?></td>
+                                                    <td align="center"><?= $tampil['aturan'] ?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>

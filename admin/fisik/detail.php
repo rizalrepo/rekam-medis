@@ -29,6 +29,8 @@ if (mysqli_connect_errno()) {
                                 <dl class="row">
                                     <dt class="col-sm-3">Nama Pasien</dt>
                                     <dd class="col-sm-9">: <?= $d['nm_pasien'] ?></dd>
+                                    <dt class="col-sm-3">Nomor Kartu</dt>
+                                    <dd class="col-sm-9">: <?= $d['no_kartu'] ?></dd>
                                     <dt class="col-sm-3">Jenis Kelamin</dt>
                                     <dd class="col-sm-9">: <?= $d['jk'] ?></dd>
                                     <dt class="col-sm-3">TTL</dt>

@@ -8,16 +8,16 @@ if (isset($_POST['cetak'])) {
     $jp = $_POST['jp'];
     if (!empty($jp)) {
 
-        $sql = mysqli_query($con, "SELECT * FROM pasien WHERE jp = '$jp' ORDER BY id_pasien DESC");
+        $sql = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jp = '$jp' ORDER BY id_pasien DESC");
         $label = 'LAPORAN DATA PASIEN <br> Pengobatan : ' . $jp;
     } else {
-        $sql = mysqli_query($con, "SELECT * FROM pasien ORDER BY id_pasien DESC");
+        $sql = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli ORDER BY id_pasien DESC");
         $label = 'LAPORAN DATA PASIEN';
     }
 }
 
 require_once '../../assets/vendor/autoload.php';
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'LEGAL-L']);
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [450, 220]]);
 ob_start();
 ?>
 
@@ -69,7 +69,9 @@ ob_start();
                     <thead>
                         <tr bgcolor="#007BFF" align="center">
                             <th>No</th>
+                            <th>Nomor Kartu</th>
                             <th>Nama Pasien</th>
+                            <th>NIK</th>
                             <th>Jenis Kelamin</th>
                             <th>TTL</th>
                             <th>Usia</th>
@@ -77,6 +79,7 @@ ob_start();
                             <th>Alamat</th>
                             <th>Pengobatan</th>
                             <th>Nomor BPJS</th>
+                            <th>Poli</th>
                             <th>Nomor HP</th>
                             <th>Tanggal Input</th>
                         </tr>
@@ -89,9 +92,11 @@ ob_start();
                             $y = $today->diff($tgl)->y; ?>
                             <tr>
                                 <td align="center" width="5%"><?= $no++; ?></td>
+                                <td align="center"><?= $data['no_kartu'] ?></td>
                                 <td><?= $data['nm_pasien'] ?></td>
+                                <td align="center"><?= $data['nik'] ?></td>
                                 <td align="center"><?= $data['jk'] ?></td>
-                                <td><?= $data['tmpt_lahir'] ?>, <?= tgl($data['tgl_lahir']) ?></td>
+                                <td align="center"><?= $data['tmpt_lahir'] ?>, <?= tgl($data['tgl_lahir']) ?></td>
                                 <td align="center"><?= $y . ' Tahun' ?></td>
                                 <td align="center"><?= $data['pekerjaan'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
@@ -103,6 +108,7 @@ ob_start();
                                         echo '-';
                                     } ?>
                                 </td>
+                                <td align="center"><?= $data['nm_poli'] ?></td>
                                 <td align="center"><?= $data['hp'] ?></td>
                                 <td align="center"><?= tgl($data['tgl_input']) ?></td>
                             </tr>

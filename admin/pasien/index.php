@@ -45,6 +45,7 @@ include_once '../../template/sidebar.php';
                                         <tr align="center">
                                             <th>No</th>
                                             <th>Nama Pasien</th>
+                                            <th>NIK</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Usia</th>
                                             <th>Pengobatan</th>
@@ -55,7 +56,7 @@ include_once '../../template/sidebar.php';
 
                                     <tbody>
                                         <?php
-                                        $no = 1;
+                                        $no2 = 1;
                                         $data = $con->query("SELECT * FROM pasien ORDER BY id_pasien DESC");
                                         while ($row = $data->fetch_array()) {
                                             $tgl = new DateTime($row['tgl_lahir']);
@@ -63,8 +64,9 @@ include_once '../../template/sidebar.php';
                                             $y = $today->diff($tgl)->y;
                                         ?>
                                             <tr>
-                                                <td align="center" width="5%"><?= $no++ ?></td>
+                                                <td align="center" width="5%"><?= $no2++ ?></td>
                                                 <td><?= $row['nm_pasien'] ?></td>
+                                                <td align="center"><?= $row['nik'] ?></td>
                                                 <td align="center"><?= $row['jk'] ?></td>
                                                 <td align="center"><?= $y . ' Tahun' ?></td>
                                                 <td align="center"><?= $row['jp'] ?></td>

@@ -83,6 +83,7 @@ ob_start();
                         <tr bgcolor="#007BFF" align="center">
                             <th>No</th>
                             <th>Data Pasien</th>
+                            <th>Nomor Kartu</th>
                             <th>Jenis Kelamin</th>
                             <th>Usia</th>
                             <th>Untuk Keperluan</th>
@@ -101,10 +102,11 @@ ob_start();
                             <tr>
                                 <td align="center" width="5%"><?= $no++; ?></td>
                                 <td><?= $data['nm_pasien'] ?></td>
+                                <td align="center"><?= $data['no_kartu'] ?></td>
                                 <td align="center"><?= $data['jk'] ?></td>
                                 <td align="center"><?= $y . ' Tahun' ?></td>
                                 <td><?= $data['untuk'] ?></td>
-                                <td><?= tgl_indo($data['tanggal']) ?></td>
+                                <td align="center"><?= tgl_indo($data['tanggal']) ?></td>
                                 <td align="center"><?= $data['pst'] ?></td>
                                 <td><?= $data['catatan'] ?></td>
                                 <td><?= $data['nm_dokter'] ?></td>

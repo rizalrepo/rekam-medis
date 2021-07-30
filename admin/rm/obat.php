@@ -43,12 +43,16 @@ $row = $query->fetch_array();
                                     </select>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-form-label">Jumlah</label>
+                                    <label class="col-form-label">Jumlah (Pcs)</label>
                                     <input type="number" class="form-control" name="jumlah" required>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-form-label">Dosis</label>
                                     <input type="text" class="form-control" name="dosis" required>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-form-label">Aturan Pakai</label>
+                                    <input type="text" class="form-control" name="aturan" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
@@ -85,8 +89,9 @@ $row = $query->fetch_array();
                                         <tr align="center">
                                             <th>No</th>
                                             <th>Nama Obat</th>
-                                            <th>Jumlah</th>
+                                            <th>Jumlah (Pcs)</th>
                                             <th>Dosis</th>
+                                            <th>Aturan Pakai</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -102,6 +107,7 @@ $row = $query->fetch_array();
                                                 <td><?= $row['nm_obat'] ?></td>
                                                 <td align="center"><?= $row['jumlah'] ?></td>
                                                 <td align="center"><?= $row['dosis'] ?></td>
+                                                <td align="center"><?= $row['aturan'] ?></td>
                                                 <td align="center" width="5%">
                                                     <a href="hapus-obat?id=<?= $row[0] ?>&idm=<?= $id ?>" class="btn btn-danger btn-xs alert-hapus mt-1" title="Hapus"><i class="fa fa-trash"></i></a>
                                                 </td>
@@ -131,13 +137,15 @@ if (isset($_POST['submit'])) {
     $a = $_POST['id_obat'];
     $b = $_POST['jumlah'];
     $c = $_POST['dosis'];
+    $d = $_POST['aturan'];
 
     $tambah = $con->query("INSERT INTO rm_obat VALUES (
         '', 
         '$id',
         '$a', 
         '$b',
-        '$c'
+        '$c',
+        '$d'
     )");
 
     if ($tambah) {

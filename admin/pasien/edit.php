@@ -48,9 +48,21 @@ $jp = [
                         <div class="card-body" style="background-color: white;">
                             <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Nomor Kartu Pasien</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="no_kartu" value="<?= $row['no_kartu'] ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Pasien</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" name="nm_pasien" value="<?= $row['nm_pasien'] ?>" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">NIK</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" name="nik" value="<?= $row['nik'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -99,6 +111,12 @@ $jp = [
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Poli</label>
+                                    <div class="col-sm-10">
+                                        <?= cmb_dinamis('id_poli', 'poli', 'nm_poli', 'id_poli', $row['id_poli'], 'required') ?>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">No. HP</label>
                                     <div class="col-sm-10">
                                         <input type="number" class="form-control" name="hp" value="<?= $row['hp'] ?>" required>
@@ -141,6 +159,7 @@ include_once '../../template/footer.php';
 <?php
 if (isset($_POST['submit'])) {
     $nm_pasien = $_POST['nm_pasien'];
+    $nik = $_POST['nik'];
     $jk = $_POST['jk'];
     $tmpt_lahir = $_POST['tmpt_lahir'];
     $tgl_lahir = $_POST['tgl_lahir'];
@@ -148,10 +167,12 @@ if (isset($_POST['submit'])) {
     $alamat = $_POST['alamat'];
     $jp = $_POST['jp'];
     $bpjs = $_POST['bpjs'];
+    $id_poli = $_POST['id_poli'];
     $hp = $_POST['hp'];
 
     $update = $con->query("UPDATE pasien SET 
         nm_pasien = '$nm_pasien', 
+        nik = '$nik', 
         jk = '$jk',
         tmpt_lahir = '$tmpt_lahir',
         tgl_lahir = '$tgl_lahir',
@@ -159,6 +180,7 @@ if (isset($_POST['submit'])) {
         alamat = '$alamat',
         jp = '$jp',
         bpjs = '$bpjs',
+        id_poli = '$id_poli',
         hp = '$hp'
         WHERE id_pasien = '$id'
     ");

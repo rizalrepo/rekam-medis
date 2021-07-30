@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2021 at 03:59 PM
+-- Generation Time: Jul 30, 2021 at 11:31 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -1294,7 +1294,9 @@ INSERT INTO `obat` (`id_obat`, `nm_obat`, `kekuatan`, `bentuk`, `harga`) VALUES
 
 CREATE TABLE `pasien` (
   `id_pasien` int(11) NOT NULL,
+  `no_kartu` varchar(30) NOT NULL,
   `nm_pasien` varchar(50) NOT NULL,
+  `nik` varchar(30) NOT NULL,
   `jk` varchar(20) NOT NULL,
   `tmpt_lahir` varchar(50) NOT NULL,
   `tgl_lahir` date NOT NULL,
@@ -1302,6 +1304,7 @@ CREATE TABLE `pasien` (
   `alamat` text NOT NULL,
   `jp` varchar(20) NOT NULL,
   `bpjs` varchar(30) DEFAULT NULL,
+  `id_poli` int(11) NOT NULL,
   `hp` varchar(20) NOT NULL,
   `id_user` int(11) NOT NULL,
   `tgl_input` date NOT NULL
@@ -1311,9 +1314,9 @@ CREATE TABLE `pasien` (
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id_pasien`, `nm_pasien`, `jk`, `tmpt_lahir`, `tgl_lahir`, `pekerjaan`, `alamat`, `jp`, `bpjs`, `hp`, `id_user`, `tgl_input`) VALUES
-(2, 'Nabila Zaskia', 'Perempuan', 'Banjarmasin', '1999-05-27', 'Mahasiswa', 'Komplek H. Iyus No. 666', 'Umum', '', '084589585800', 2, '2021-07-01'),
-(3, 'Abdul Khodir', 'Laki-laki', 'Banjarbaru', '1994-07-13', 'Pelajar', 'Batulicin', 'BPJS', '567890', '084589585800', 2, '2021-07-01');
+INSERT INTO `pasien` (`id_pasien`, `no_kartu`, `nm_pasien`, `nik`, `jk`, `tmpt_lahir`, `tgl_lahir`, `pekerjaan`, `alamat`, `jp`, `bpjs`, `id_poli`, `hp`, `id_user`, `tgl_input`) VALUES
+(2, 'NKP0000001', 'Nabila Zaskia', '4567', 'Perempuan', 'Banjarmasin', '1999-05-27', 'Mahasiswa', 'Komplek H. Iyus No. 666', 'Umum', '', 3, '084589585800', 2, '2021-07-01'),
+(3, 'NKP0000002', 'Abdul Khodir', '5678', 'Laki-laki', 'Banjarbaru', '1994-07-13', 'Pelajar', 'Batulicin', 'BPJS', '567890', 3, '084589585800', 2, '2021-07-01');
 
 -- --------------------------------------------------------
 
@@ -1358,7 +1361,7 @@ CREATE TABLE `rm` (
 --
 
 INSERT INTO `rm` (`id_rm`, `id_pasien`, `tanggal`, `id_poli`, `keluhan`, `diagnosis`, `id_dokter`, `tindakan`, `id_user`) VALUES
-('RM0000001', 2, '2021-06-30', 2, 'Sakit Kepala', 'Vertigo', 3, 'Pemberian Obat Terjadwal', 2);
+('RM0000001', 2, '2021-07-30', 2, 'Sakit Kepala', 'Vertigo', 3, 'Pemberian Obat ', 2);
 
 -- --------------------------------------------------------
 
@@ -1371,15 +1374,16 @@ CREATE TABLE `rm_obat` (
   `id_rm` varchar(11) NOT NULL,
   `id_obat` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `dosis` varchar(30) NOT NULL
+  `dosis` varchar(30) NOT NULL,
+  `aturan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `rm_obat`
 --
 
-INSERT INTO `rm_obat` (`id_rm_obat`, `id_rm`, `id_obat`, `jumlah`, `dosis`) VALUES
-(3, 'RM0000001', 1029, 4, '3x1');
+INSERT INTO `rm_obat` (`id_rm_obat`, `id_rm`, `id_obat`, `jumlah`, `dosis`, `aturan`) VALUES
+(1, 'RM0000001', 1030, 2, '3x1', 'Setelah Makan');
 
 -- --------------------------------------------------------
 
@@ -1504,37 +1508,37 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT for table `mcu_fisik`
 --
 ALTER TABLE `mcu_fisik`
-  MODIFY `id_mcu_fisik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_fisik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mcu_hamil`
 --
 ALTER TABLE `mcu_hamil`
-  MODIFY `id_mcu_hamil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_hamil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mcu_jiwa`
 --
 ALTER TABLE `mcu_jiwa`
-  MODIFY `id_mcu_jiwa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_mcu_jiwa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `mcu_mata`
 --
 ALTER TABLE `mcu_mata`
-  MODIFY `id_mcu_mata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_mcu_mata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `mcu_napza`
 --
 ALTER TABLE `mcu_napza`
-  MODIFY `id_mcu_napza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_napza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mcu_sehat`
 --
 ALTER TABLE `mcu_sehat`
-  MODIFY `id_mcu_sehat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_sehat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `mcu_virus`
 --
 ALTER TABLE `mcu_virus`
-  MODIFY `id_mcu_virus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_virus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `obat`
 --
@@ -1544,7 +1548,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `poli`
 --
@@ -1554,7 +1558,7 @@ ALTER TABLE `poli`
 -- AUTO_INCREMENT for table `rm_obat`
 --
 ALTER TABLE `rm_obat`
-  MODIFY `id_rm_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_rm_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `user`
 --

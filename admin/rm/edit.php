@@ -45,25 +45,18 @@ $row = $query->fetch_array();
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Pasien</label>
+                                    <div class="col-sm-10 input-group">
+                                        <input type="text" class="form-control" hidden name="id_pasien" id="id_pasien" value="<?= $row['id_pasien'] ?>" required>
+                                        <input type="text" class="form-control" id="nm_pasien" value="<?= $row['nm_pasien'] ?>" required readonly>
+                                        <span class="input-group-append">
+                                            <button type="button" data-toggle="modal" data-target="#modal_pasien" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Nomor Kartu</label>
                                     <div class="col-sm-10">
-                                        <select name="id_pasien" class="form-control select2" style="width: 100%;" onchange="changeValue(this.value)">
-                                            <?php
-                                            $jsArray = "var data = new Array();";
-                                            $q = $con->query("SELECT * FROM pasien ORDER BY id_pasien DESC");
-                                            while ($d = $q->fetch_array()) {
-                                                if ($d['id_pasien'] == $row['id_pasien']) {
-                                            ?>
-                                                    <option value="<?= $d['id_pasien']; ?>" selected="<?= $d['id_pasien']; ?>"><?= $d['nm_pasien'] ?></option>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <option value="<?= $d['id_pasien'] ?>"><?= $d['nm_pasien'] ?></option>
-                                            <?php
-                                                }
-                                                $jsArray .= "data['" . $d['id_pasien'] . "'] = { jk:'" . addslashes($d['jk']) . "', tmpt_lahir:'" . addslashes($d['tmpt_lahir']) . "', tgl_lahir:'" . addslashes($d['tgl_lahir']) . "', jp:'" . addslashes($d['jp']) . "'};";
-                                            }
-                                            ?>
-                                        </select>
+                                        <input type="text" class="form-control" id="no_kartu" value="<?= $row['no_kartu'] ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -172,19 +165,81 @@ $row = $query->fetch_array();
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<div class="modal fade" id="modal_pasien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pilih Pasien</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table id="example1" class="table table-bordered">
+                        <thead class="bg-lightblue">
+                            <tr align="center">
+                                <th>No</th>
+                                <th>Nomor Kartu</th>
+                                <th>Nama Pasien</th>
+                                <th>NIK</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Jenis Pengobatan</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            $data = $con->query("SELECT * FROM pasien ORDER BY id_pasien ASC");
+                            while ($row = $data->fetch_array()) {
+                            ?>
+                                <tr>
+                                    <td align="center" width="5%"><?= $no++ ?></td>
+                                    <td align="center"><?= $row['no_kartu'] ?></td>
+                                    <td><?= $row['nm_pasien'] ?></td>
+                                    <td align="center"><?= $row['nik'] ?></td>
+                                    <td align="center"><?= $row['jk'] ?></td>
+                                    <td align="center"><?= $row['jp'] ?></td>
+                                    <td align="center" width="18%">
+                                        <button class="btn btn-xs btn-success" id="select" data-nm_pasien="<?= $row['nm_pasien'] ?>" data-id_pasien="<?= $row['id_pasien'] ?>" data-tmpt_lahir="<?= $row['tmpt_lahir']  ?>" data-tgl_lahir="<?= $row['tgl_lahir'] ?>" data-no_kartu="<?= $row['no_kartu'] ?>" data-jk="<?= $row['jk'] ?>" data-jp="<?= $row['jp'] ?>">
+                                            Pilih
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 include_once '../../template/footer.php';
 ?>
 <script type="text/javascript">
-    <?= $jsArray ?>
-
-    function changeValue(id_pasien) {
-        document.getElementById('jk').value = data[id_pasien].jk;
-        document.getElementById('tmpt_lahir').value = data[id_pasien].tmpt_lahir;
-        document.getElementById('tgl_lahir').value = data[id_pasien].tgl_lahir;
-        document.getElementById('jp').value = data[id_pasien].jp;
-    }
+    $(document).ready(function() {
+        $(document).on('click', '#select', function() {
+            var nm_pasien = $(this).data('nm_pasien');
+            var id_pasien = $(this).data('id_pasien');
+            var no_kartu = $(this).data('no_kartu');
+            var tmpt_lahir = $(this).data('tmpt_lahir');
+            var tgl_lahir = $(this).data('tgl_lahir');
+            var jk = $(this).data('jk');
+            var jp = $(this).data('jp');
+            $('#nm_pasien').val(nm_pasien);
+            $('#id_pasien').val(id_pasien);
+            $('#no_kartu').val(no_kartu);
+            $('#tmpt_lahir').val(tmpt_lahir);
+            $('#tgl_lahir').val(tgl_lahir);
+            $('#jk').val(jk);
+            $('#jp').val(jp);
+            $('#modal_pasien').modal('hide');
+        });
+    })
 </script>
 <?php
 if (isset($_POST['submit'])) {

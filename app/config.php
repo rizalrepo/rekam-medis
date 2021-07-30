@@ -340,15 +340,15 @@ function cmb_dinamis($name, $table, $field, $pk, $selected = null, $extra = NULL
   $sql_details = array(
     'user' => 'root',
     'pass' => '',
-    'db'   => 'db_farmasi',
+    'db'   => 'db_rm',
     'host' => 'localhost'
   );
 
   $con = $sql_details;
   $cont = mysqli_connect($con['host'], $con['user'], $con['pass'], $con['db']);
 
-  $cmb = "<select name='$name'class='form-control'$extra>";
-  $cmb .= "<option>---Pilih---</option>";
+  $cmb = "<select name='$name'class='form-control select2'$extra>";
+  $cmb .= "<option>-- Pilih --</option>";
   $data = $cont->query(" SELECT * FROM $table ");
 
   foreach ($data as $row) {
