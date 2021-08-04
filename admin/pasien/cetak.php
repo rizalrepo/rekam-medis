@@ -10,9 +10,17 @@ if (isset($_POST['cetak'])) {
 
         $sql = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jp = '$jp' ORDER BY id_pasien DESC");
         $label = 'LAPORAN DATA PASIEN <br> Pengobatan : ' . $jp;
+        $sql1 = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jp = '$jp' AND jk = 'Laki-laki'");
+        $sql2 = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jp = '$jp' AND jk = 'Perempuan'");
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else {
         $sql = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli ORDER BY id_pasien DESC");
         $label = 'LAPORAN DATA PASIEN';
+        $sql1 = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jk = 'Laki-laki'");
+        $sql2 = mysqli_query($con, "SELECT * FROM pasien p JOIN poli pl ON pl.id_poli = p.id_poli WHERE jk = 'Perempuan'");
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     }
 }
 
@@ -116,6 +124,9 @@ ob_start();
                     </tbody>
 
                 </table>
+                <hr>
+                <i>Jumlah Pasien Laki-laki : <b><?= $num1 ?> Orang</b></i><br>
+                <i>Jumlah Pasien Perempuan : <b><?= $num2 ?> Orang</b></i>
 
             </div>
         </div>

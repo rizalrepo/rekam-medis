@@ -14,18 +14,43 @@ if (isset($_POST['cetak'])) {
     if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_dokter == null) {
 
         $sql = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY id_rm DESC");
+
+        $sql1 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Laki-laki' ORDER BY id_rm DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Perempuan' ORDER BY id_rm DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
+
         $label = 'LAPORAN DATA REKAM MEDIS <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == $cekid_dokter) {
         $sql = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.id_dokter = '$id_dokter' ORDER BY id_rm DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
         $label = 'LAPORAN DATA REKAM MEDIS <br> Dokter : ' . $dt['nm_dokter'];
+
+        $sql1 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_rm DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_rm DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_dokter == $cekid_dokter) {
         $sql = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' AND r.id_dokter = '$id_dokter' ORDER BY id_rm DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
         $label = 'LAPORAN DATA REKAM MEDIS <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Dokter : ' . $dt['nm_dokter'];
+
+        $sql1 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' AND r.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_rm DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE r.tanggal BETWEEN '$tgl1' AND '$tgl2' AND r.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_rm DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == null) {
         $sql = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter ORDER BY id_rm DESC");
         $label = 'LAPORAN DATA REKAM MEDIS';
+
+        $sql1 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE jk = 'Laki-laki' ORDER BY id_rm DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien JOIN poli pl ON pl.id_poli = r.id_poli JOIN dokter d ON d.id_dokter = r.id_dokter WHERE jk = 'Perempuan' ORDER BY id_rm DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     }
 }
 
@@ -119,7 +144,9 @@ ob_start();
                     </tbody>
 
                 </table>
-
+                <hr>
+                <i>Jumlah Pasien Laki-laki : <b><?= $num1 ?> Orang</b></i><br>
+                <i>Jumlah Pasien Perempuan : <b><?= $num2 ?> Orang</b></i>
             </div>
         </div>
     </div>

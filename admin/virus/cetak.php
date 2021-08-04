@@ -15,17 +15,44 @@ if (isset($_POST['cetak'])) {
 
         $sql = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY id_mcu_virus DESC");
         $label = 'LAPORAN DATA MCU VIRUS <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
+
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Laki-laki' ORDER BY id_mcu_virus DESC");
+
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Perempuan' ORDER BY id_mcu_virus DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == $cekid_dokter) {
         $sql = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' ORDER BY id_mcu_virus DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
         $label = 'LAPORAN DATA MCU VIRUS <br> Dokter : ' . $dt['nm_dokter'];
+
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_virus DESC");
+
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_virus DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_dokter == $cekid_dokter) {
         $sql = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' ORDER BY id_mcu_virus DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
         $label = 'LAPORAN DATA MCU VIRUS <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Dokter : ' . $dt['nm_dokter'];
+
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_virus DESC");
+
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_virus DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == null) {
         $sql = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter ORDER BY id_mcu_virus DESC");
         $label = 'LAPORAN DATA MCU VIRUS';
+
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Laki-laki' ORDER BY id_mcu_virus DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Perempuan' ORDER BY id_mcu_virus DESC");
+
+        $num1 = mysqli_num_rows($sql1);
+        $num2 = mysqli_num_rows($sql2);
     }
 }
 
@@ -119,7 +146,9 @@ ob_start();
                     </tbody>
 
                 </table>
-
+                <hr>
+                <i>Jumlah Pasien Laki-laki : <b><?= $num1 ?> Orang</b></i><br>
+                <i>Jumlah Pasien Perempuan : <b><?= $num2 ?> Orang</b></i>
             </div>
         </div>
     </div>
