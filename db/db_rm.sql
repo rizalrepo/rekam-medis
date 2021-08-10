@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2021 at 11:31 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: 10 Agu 2021 pada 10.12
+-- Versi Server: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dokter`
+-- Struktur dari tabel `dokter`
 --
 
 CREATE TABLE `dokter` (
@@ -40,17 +40,23 @@ CREATE TABLE `dokter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `dokter`
+-- Dumping data untuk tabel `dokter`
 --
 
 INSERT INTO `dokter` (`id_dokter`, `nm_dokter`, `nip`, `sip`, `spesialis`, `tgl_masuk`, `alamat`, `hp`) VALUES
 (2, 'dr. Agung Prihatnanto, Sp. KFR', '11223344551', '-', 'Spesialis Rehab Medik', '2018-06-07', 'Pagatan', '084589585899'),
-(3, 'dr. Ahmad Hamidi', '11223344553', '-', 'Umum', '2018-07-13', 'Batulicin', '081391701913');
+(3, 'dr. Ahmad Hamidi', '11223344553', '-', 'Umum', '2018-07-13', 'Batulicin', '081391701913'),
+(4, 'dr.Raisa Noor Islami', '123456789', '12345', 'Spesialis Kesehatan Jiwa', '2007-09-01', 'Banjarmasin', '08772635481'),
+(5, 'dr.Yasira ', '133245667', '12344', 'Spesialis Rehab Medik', '2007-08-07', 'Banjarmasin utara', '0915535455321'),
+(6, 'dr.Puspa Sari', '144536728', '13325', 'Spesialis Anastesi', '2007-04-04', 'Banjarmasin selatan', '089973726534'),
+(7, 'dr.Putri Soraya', '134256379', '133245', 'Spesialis Kandungan', '2008-05-05', 'Banjarmasin ', '08997658734'),
+(8, 'dr.Kholidah', '142563784', '1556', 'Spesialis Anak', '2007-07-07', 'pelaihari', '087764859532'),
+(9, 'dr.Desi', '13456725', '132456', 'Spesialis Penyakit Dalam', '2008-08-08', 'Banjarmasin', '08974635482');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_fisik`
+-- Struktur dari tabel `mcu_fisik`
 --
 
 CREATE TABLE `mcu_fisik` (
@@ -68,16 +74,23 @@ CREATE TABLE `mcu_fisik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_fisik`
+-- Dumping data untuk tabel `mcu_fisik`
 --
 
 INSERT INTO `mcu_fisik` (`id_mcu_fisik`, `id_pasien`, `untuk`, `tanggal`, `ekg`, `tatto`, `cacat`, `terbang`, `catatan`, `id_dokter`, `id_user`) VALUES
-(2, 3, 'lorem', '2021-07-07', 'lorem', 'Tidak Bertatto', 'Tidak Ada', 'Laik Terbang', 'lorem', 3, 2);
+(2, 3, 'lorem', '2021-07-07', 'lorem', 'Tidak Bertatto', 'Tidak Ada', 'Laik Terbang', 'lorem', 3, 2),
+(3, 9, 'Pembuatan SKCK', '2021-08-10', 'normal', 'Tidak Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'tidak ada', 6, 2),
+(4, 11, 'pembuatan sim', '2021-08-10', 'normal', 'Tidak Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'tidak ada', 5, 2),
+(5, 6, 'skck', '2021-08-10', 'lorem', 'Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'tidak ada', 6, 2),
+(6, 8, 'pembuatan sim', '2021-08-10', 'kardiomiopati', 'Tidak Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'pengobatan ', 5, 2),
+(7, 12, 'vaksin', '2021-08-10', 'keracunan obat-obatan', 'Tidak Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'pengobatan ', 5, 2),
+(8, 12, 'pembuatan sim', '2021-08-10', 'penyakit jantung Koroner', 'Tidak Bertatto', 'Tidak Ada', 'Tidak Laik Terbang', 'tidak ada', 5, 2),
+(9, 7, 'pembuatan sim', '2021-08-10', 'normal', 'Bertatto', 'Ada', 'Tidak Laik Terbang', 'tidak ada', 5, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_hamil`
+-- Struktur dari tabel `mcu_hamil`
 --
 
 CREATE TABLE `mcu_hamil` (
@@ -92,16 +105,23 @@ CREATE TABLE `mcu_hamil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_hamil`
+-- Dumping data untuk tabel `mcu_hamil`
 --
 
 INSERT INTO `mcu_hamil` (`id_mcu_hamil`, `id_pasien`, `untuk`, `tanggal`, `pst`, `catatan`, `id_dokter`, `id_user`) VALUES
-(2, 2, 'lorem', '2021-07-07', 'Negatif', 'lorem', 3, 2);
+(2, 2, 'lorem', '2021-07-07', 'Negatif', 'lorem', 3, 2),
+(4, 2, 'vaksin', '2021-08-10', 'Negatif', 'normal ', 7, 2),
+(5, 4, 'vaksin', '2021-08-10', 'Positif', 'hamil 2 bln', 7, 2),
+(6, 5, 'vaksin', '2021-08-10', 'Negatif', 'normal', 7, 2),
+(7, 9, 'vaksin', '2021-08-10', 'Positif', 'hamil 3bln', 7, 2),
+(8, 10, 'vaksin', '2021-08-10', 'Positif', 'hamil 3 bulan', 7, 2),
+(9, 11, 'vaksin', '2021-08-10', 'Negatif', 'normal', 7, 2),
+(10, 12, 'vaksin', '2021-08-10', 'Positif', 'hamil 3 bulan', 7, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_jiwa`
+-- Struktur dari tabel `mcu_jiwa`
 --
 
 CREATE TABLE `mcu_jiwa` (
@@ -117,16 +137,23 @@ CREATE TABLE `mcu_jiwa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_jiwa`
+-- Dumping data untuk tabel `mcu_jiwa`
 --
 
 INSERT INTO `mcu_jiwa` (`id_mcu_jiwa`, `id_pasien`, `untuk`, `tanggal`, `rohani`, `psikolog`, `catatan`, `id_dokter`, `id_user`) VALUES
-(1, 3, 'Masuk Sekolah', '2021-07-06', 'Sehat', 'Sehat', 'lorem', 2, 2);
+(1, 3, 'Masuk Sekolah', '2021-07-06', 'Sehat', 'Sehat', 'lorem', 2, 2),
+(2, 2, 'skck', '2021-08-10', 'tidak', 'tidak', 'tidak ada', 6, 2),
+(3, 4, 'Pembuatan SKCK', '2021-08-10', 'tidak', 'tidak', 'tidak ada', 6, 2),
+(4, 6, 'Pembuatan SKCK', '2021-08-10', 'tidak', 'tidak', 'tidak ada', 6, 2),
+(5, 9, 'pendaftaran Kuliah', '2021-08-10', 'Normal', 'normal', 'tidak ada catatan', 6, 2),
+(6, 7, 'pendaftaran Kuliah', '2021-08-10', 'Normal', 'normal', 'tidak ada catatan', 6, 2),
+(7, 5, 'pendaftaran Kuliah', '2021-08-10', 'tidak ', 'tidak', 'tidak ada', 6, 2),
+(8, 8, 'Pembuatan SKCK', '2021-08-10', 'normal', 'normal', 'tidak ada', 6, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_mata`
+-- Struktur dari tabel `mcu_mata`
 --
 
 CREATE TABLE `mcu_mata` (
@@ -142,16 +169,23 @@ CREATE TABLE `mcu_mata` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_mata`
+-- Dumping data untuk tabel `mcu_mata`
 --
 
 INSERT INTO `mcu_mata` (`id_mcu_mata`, `id_pasien`, `untuk`, `tanggal`, `buta`, `cacat`, `catatan`, `id_dokter`, `id_user`) VALUES
-(1, 3, 'Masuk Sekolah SMK', '2021-07-06', 'Tidak', 'Tidak', 'lorem', 3, 2);
+(1, 3, 'Masuk Sekolah SMK', '2021-07-06', 'Tidak', 'Tidak', 'lorem', 3, 2),
+(2, 5, 'persyratan kerja', '2021-08-03', 'tidak', 'tidak', 'normal', 3, 2),
+(3, 6, 'Pembuatan SKCK', '2021-08-07', 'Tidak', 'Tidak', 'Normal', 7, 2),
+(5, 7, 'Pembuatan SKCK', '2021-08-10', 'tidak', 'tidak', 'tidak ada', 7, 2),
+(6, 8, 'pendaftaran Kuliah', '2021-08-10', 'tidak', 'tidak', 'normal', 5, 2),
+(7, 9, 'pendaftaran Kuliah', '2021-08-10', 'Tidak', 'Tidak', 'normal', 5, 2),
+(8, 4, 'pendaftaran Kuliah', '2021-08-10', 'Tidak', 'Tidak', 'normal', 5, 2),
+(9, 2, 'pembuatan sim', '2021-08-10', 'Tidak', 'Tidak', 'normal', 5, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_napza`
+-- Struktur dari tabel `mcu_napza`
 --
 
 CREATE TABLE `mcu_napza` (
@@ -172,16 +206,23 @@ CREATE TABLE `mcu_napza` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_napza`
+-- Dumping data untuk tabel `mcu_napza`
 --
 
 INSERT INTO `mcu_napza` (`id_mcu_napza`, `id_pasien`, `untuk`, `tanggal`, `methamphetamine`, `amphetamine`, `benzodiazepine`, `thc`, `morphine`, `cocaine`, `hasil`, `catatan`, `id_dokter`, `id_user`) VALUES
-(2, 3, 'Masuk Sekolah SMK', '2021-07-07', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Negatif NAPZA', 'lorem', 2, 2);
+(2, 3, 'Masuk Sekolah SMK', '2021-07-07', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Negatif NAPZA', 'lorem', 2, 2),
+(3, 8, 'skck', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'reaktif', 'tidak ada', 6, 2),
+(4, 4, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 8, 2),
+(5, 6, 'pendaftaran Kuliah', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 8, 2),
+(6, 7, 'pendaftaran Kuliah', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'reaktif untuk benzo', 8, 2),
+(7, 9, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'normal', 'tidak ada', 8, 2),
+(8, 5, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 8, 2),
+(10, 2, 'pembuatan sim', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 8, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_sehat`
+-- Struktur dari tabel `mcu_sehat`
 --
 
 CREATE TABLE `mcu_sehat` (
@@ -202,16 +243,23 @@ CREATE TABLE `mcu_sehat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_sehat`
+-- Dumping data untuk tabel `mcu_sehat`
 --
 
 INSERT INTO `mcu_sehat` (`id_mcu_sehat`, `id_pasien`, `untuk`, `tanggal`, `tekanan`, `tinggi`, `berat`, `nadi`, `respirasi`, `suhu`, `hasil`, `catatan`, `id_dokter`, `id_user`) VALUES
-(2, 3, 'Masuk Sekolah SMK', '2021-07-06', '120/80', '168,5', '50', '80', '20', '35', 'Sehat', 'lorem', 3, 2);
+(2, 3, 'Masuk Sekolah SMK', '2021-07-06', '120/80', '168,5', '50', '80', '20', '35', 'Sehat', 'lorem', 3, 2),
+(3, 2, 'skck', '2021-08-10', '120/90', '159', '56', '60', '90', '36,7', 'baik', 'tidak ada', 6, 2),
+(4, 4, 'pendaftaran Kuliah', '2021-08-10', '120/80', '159', '50', '30', '20', '30', 'normal', 'tidak ada', 7, 2),
+(5, 5, 'pendaftaran Kuliah', '2021-08-10', '100/80', '150', '50', '30', '40', '40', 'normal', 'tidak ada catatan', 7, 2),
+(6, 6, 'pendaftaran Kuliah', '2021-08-10', '120/90', '150', '50', '40', '30', '40', 'Sehat', 'tidak ada catatan', 7, 2),
+(7, 7, 'pembuatan sim', '2021-08-10', '130/90', '170', '60', '40', '40', '35', 'normal', 'tidak ada catatan', 7, 2),
+(8, 8, 'pembuatan sim', '2021-08-10', '120/90', '180', '70', '60', '40', '40', 'sehat', 'tidak ada', 7, 2),
+(9, 9, 'Pembuatan SKCK', '2021-08-10', '120/80', '150', '45', '30', '40', '30', 'normal', 'tidak ada', 7, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `mcu_virus`
+-- Struktur dari tabel `mcu_virus`
 --
 
 CREATE TABLE `mcu_virus` (
@@ -228,16 +276,23 @@ CREATE TABLE `mcu_virus` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `mcu_virus`
+-- Dumping data untuk tabel `mcu_virus`
 --
 
 INSERT INTO `mcu_virus` (`id_mcu_virus`, `id_pasien`, `untuk`, `tanggal`, `covid`, `hepatitis`, `hiv`, `catatan`, `id_dokter`, `id_user`) VALUES
-(2, 3, 'Masuk Sekolah SMK', '2021-07-06', 'Reaktif', 'Non Reaktif', 'Non Reaktif', 'Aman', 3, 2);
+(2, 3, 'Masuk Sekolah SMK', '2021-07-06', 'Reaktif', 'Non Reaktif', 'Non Reaktif', 'Aman', 3, 2),
+(5, 4, 'pendaftaran Kuliah', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2),
+(6, 2, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2),
+(7, 6, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2),
+(8, 7, 'pendaftaran Kuliah', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2),
+(10, 8, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2),
+(11, 9, 'Pembuatan SKCK', '2021-08-10', 'Non Reaktif', 'Reaktif', 'Non Reaktif', 'perawatan untuk pengobatan', 9, 2),
+(12, 5, 'pendaftaran Kuliah', '2021-08-10', 'Non Reaktif', 'Non Reaktif', 'Non Reaktif', 'tidak ada', 9, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `obat`
+-- Struktur dari tabel `obat`
 --
 
 CREATE TABLE `obat` (
@@ -249,7 +304,7 @@ CREATE TABLE `obat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `obat`
+-- Dumping data untuk tabel `obat`
 --
 
 INSERT INTO `obat` (`id_obat`, `nm_obat`, `kekuatan`, `bentuk`, `harga`) VALUES
@@ -1289,7 +1344,7 @@ INSERT INTO `obat` (`id_obat`, `nm_obat`, `kekuatan`, `bentuk`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pasien`
+-- Struktur dari tabel `pasien`
 --
 
 CREATE TABLE `pasien` (
@@ -1311,17 +1366,27 @@ CREATE TABLE `pasien` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pasien`
+-- Dumping data untuk tabel `pasien`
 --
 
 INSERT INTO `pasien` (`id_pasien`, `no_kartu`, `nm_pasien`, `nik`, `jk`, `tmpt_lahir`, `tgl_lahir`, `pekerjaan`, `alamat`, `jp`, `bpjs`, `id_poli`, `hp`, `id_user`, `tgl_input`) VALUES
 (2, 'NKP0000001', 'Nabila Zaskia', '4567', 'Perempuan', 'Banjarmasin', '1999-05-27', 'Mahasiswa', 'Komplek H. Iyus No. 666', 'Umum', '', 3, '084589585800', 2, '2021-07-01'),
-(3, 'NKP0000002', 'Abdul Khodir', '5678', 'Laki-laki', 'Banjarbaru', '1994-07-13', 'Pelajar', 'Batulicin', 'BPJS', '567890', 3, '084589585800', 2, '2021-07-01');
+(3, 'NKP0000002', 'Abdul Khodir', '5678', 'Laki-laki', 'Banjarbaru', '1994-07-13', 'Pelajar', 'Batulicin', 'BPJS', '567890', 3, '084589585800', 2, '2021-07-01'),
+(4, 'NKP0000003', 'Puspa', '98874', 'Perempuan', 'Banjarmasin', '1999-11-10', 'Mahasiswa', 'jahri saleh', 'Umum', '', 2, '0877791123', 2, '2021-08-03'),
+(5, 'NKP0000004', 'auliani', '98087', 'Perempuan', 'pelaihari', '1998-11-20', 'mahasiswa', 'pelaihari ,kurau', 'Umum', '', 3, '0988983647', 2, '2021-08-03'),
+(6, 'NKP0000005', 'sobarin', '989976', 'Laki-laki', 'Banjarmasin', '1998-08-02', 'Swasta', 'jalan kelayan', 'BPJS', '01', 5, '088877898', 2, '2021-08-07'),
+(7, 'NKP0000006', 'Bima', '9876350', 'Laki-laki', 'Banjarmasin', '1999-12-07', 'Mahasiswa', 'jalan sungai andai', 'Umum', '', 6, '0978987364', 2, '2021-08-07'),
+(8, 'NKP0000007', 'Rahmat', '098765', 'Laki-laki', 'gambut', '1999-02-02', 'Swasta', 'Gambut', 'Umum', '', 7, '098776745', 2, '2021-08-07'),
+(9, 'NKP0000008', 'husna', '09867', 'Perempuan', 'pagatan', '2000-03-03', 'mahasiswa', 'Jl.Arif Rahman Hakim', 'BPJS', '008', 8, '098789969', 2, '2021-08-07'),
+(10, 'NKP0000009', 'Fitriani', '987746', 'Perempuan', 'Banjarmasin', '1998-08-08', 'Swasta', 'pal 7 banjarmasin selatan', 'Umum', '', 4, '089765453647', 2, '2021-08-10'),
+(11, 'NKP0000010', 'lailania', '9879855', 'Perempuan', 'gambut', '1998-02-20', 'swasta', 'Jl Gambut Raya', 'BPJS', '09', 4, '0878880987', 2, '2021-08-10'),
+(12, 'NKP0000011', 'melisa', '09876488', 'Perempuan', 'pelaihari', '1997-03-03', 'wirausaha', 'jalan kurau dalam', 'BPJS', '07', 4, '0877765489', 2, '2021-08-10'),
+(13, 'NKP0000012', 'nurul', '899786', 'Perempuan', 'Banjarbaru', '1997-04-12', 'swasta', 'Jl. banjarbaru ', 'Umum', '', 4, '0877987688', 2, '2021-08-10');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `poli`
+-- Struktur dari tabel `poli`
 --
 
 CREATE TABLE `poli` (
@@ -1331,17 +1396,23 @@ CREATE TABLE `poli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `poli`
+-- Dumping data untuk tabel `poli`
 --
 
 INSERT INTO `poli` (`id_poli`, `nm_poli`, `ket`) VALUES
 (2, 'Poli Anak', 'Poli Untuk Pemeriksaan Anak'),
-(3, 'Poli THT', 'Poli Untuk THT');
+(3, 'Poli THT', 'Poli Untuk THT'),
+(4, 'Poli kebidanan', 'Poli untuk lahiran'),
+(5, 'Poli Jantung', 'Poli untuk Penyakit jantung'),
+(6, 'Poli Jiwa', 'Poli Tentang Kejiwaan'),
+(7, 'Poli Gigi Dan Mulut', 'Poli Untu masalah Mulut Dan gigi'),
+(8, 'Poli Anastensi', 'Poli tentang penyakit anastensi'),
+(9, 'Poli Interna', 'Poli Tentang Penyakit Dalam');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rm`
+-- Struktur dari tabel `rm`
 --
 
 CREATE TABLE `rm` (
@@ -1357,16 +1428,23 @@ CREATE TABLE `rm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `rm`
+-- Dumping data untuk tabel `rm`
 --
 
 INSERT INTO `rm` (`id_rm`, `id_pasien`, `tanggal`, `id_poli`, `keluhan`, `diagnosis`, `id_dokter`, `tindakan`, `id_user`) VALUES
-('RM0000001', 2, '2021-07-30', 2, 'Sakit Kepala', 'Vertigo', 3, 'Pemberian Obat ', 2);
+('RM0000001', 2, '2021-07-30', 2, 'Sakit Kepala', 'Vertigo', 3, 'Pemberian Obat ', 2),
+('RM0000002', 4, '2021-08-03', 3, 'Flu berkepanjangan', 'infeksi hidung', 3, 'operasi', 2),
+('RM0000003', 5, '2021-08-03', 3, 'sakit tenggorokan', 'infeksi', 3, 'operasi', 2),
+('RM0000004', 5, '2021-08-03', 2, 'demam', 'demam', 2, 'rawat inap', 2),
+('RM0000005', 6, '2021-08-07', 9, 'Jantung', 'penyakit jantung koroner', 5, 'operasi', 2),
+('RM0000006', 7, '2021-08-07', 7, 'sakit gigi', 'pencabutan gigi', 9, 'operasi', 2),
+('RM0000007', 9, '2021-08-07', 4, 'kontaksi', 'hamil 7 bln', 8, 'rawat inap', 2),
+('RM0000008', 8, '2021-08-07', 6, 'sering bicara sendiri', 'depresi mayor', 6, 'rawat inap', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rm_obat`
+-- Struktur dari tabel `rm_obat`
 --
 
 CREATE TABLE `rm_obat` (
@@ -1379,16 +1457,19 @@ CREATE TABLE `rm_obat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `rm_obat`
+-- Dumping data untuk tabel `rm_obat`
 --
 
 INSERT INTO `rm_obat` (`id_rm_obat`, `id_rm`, `id_obat`, `jumlah`, `dosis`, `aturan`) VALUES
-(1, 'RM0000001', 1030, 2, '3x1', 'Setelah Makan');
+(1, 'RM0000001', 1030, 2, '3x1', 'Setelah Makan'),
+(3, 'RM0000001', 1029, 2, '3x1', 'setelah makan'),
+(4, 'RM0000003', 1028, 2, 'rendah', '3x1 hari'),
+(5, 'RM0000004', 738, 2, 'rendah', '3x1 hari');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -1400,7 +1481,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id_user`, `nm_user`, `username`, `password`, `level`) VALUES
@@ -1503,42 +1584,42 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `dokter`
 --
 ALTER TABLE `dokter`
-  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_dokter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `mcu_fisik`
 --
 ALTER TABLE `mcu_fisik`
-  MODIFY `id_mcu_fisik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mcu_fisik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `mcu_hamil`
 --
 ALTER TABLE `mcu_hamil`
-  MODIFY `id_mcu_hamil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mcu_hamil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `mcu_jiwa`
 --
 ALTER TABLE `mcu_jiwa`
-  MODIFY `id_mcu_jiwa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_jiwa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `mcu_mata`
 --
 ALTER TABLE `mcu_mata`
-  MODIFY `id_mcu_mata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_mcu_mata` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `mcu_napza`
 --
 ALTER TABLE `mcu_napza`
-  MODIFY `id_mcu_napza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mcu_napza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `mcu_sehat`
 --
 ALTER TABLE `mcu_sehat`
-  MODIFY `id_mcu_sehat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mcu_sehat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `mcu_virus`
 --
 ALTER TABLE `mcu_virus`
-  MODIFY `id_mcu_virus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_mcu_virus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `obat`
 --
@@ -1548,17 +1629,17 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `poli`
 --
 ALTER TABLE `poli`
-  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_poli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `rm_obat`
 --
 ALTER TABLE `rm_obat`
-  MODIFY `id_rm_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_rm_obat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `user`
 --
