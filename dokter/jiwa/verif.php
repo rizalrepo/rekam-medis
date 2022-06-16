@@ -15,7 +15,7 @@ $row = $query->fetch_array();
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark"><i class="fa fa-heartbeat ml-1 mr-1"></i> Edit Data Diagnosa Jiwa/Psikolog</h4>
+                    <h4 class="m-0 text-dark"><i class="fa fa-heartbeat ml-1 mr-1"></i> Verifikasi Data Diagnosa Jiwa/Psikolog</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 float-right">
                     <a href="#" onClick="history.go(-1);" class="btn btn-xs bg-dark float-right"><i class="fa fa-arrow-left"> Kembali</i></a>
@@ -103,7 +103,7 @@ $row = $query->fetch_array();
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Update</i></button>
+                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Verifikasi</i></button>
                                         <button type="reset" class="btn btn-sm btn-danger float-right mr-1"><i class="fa fa-times-circle"> Batal</i></button>
                                     </div>
                                 </div>
@@ -133,7 +133,8 @@ if (isset($_POST['submit'])) {
     $update = $con->query("UPDATE mcu_jiwa SET 
         rohani = '$rohani',
         psikolog = '$psikolog',
-        catatan = '$catatan'
+        catatan = '$catatan',
+        verif = 1
         WHERE id_mcu_jiwa = '$id'
     ");
 
@@ -142,7 +143,7 @@ if (isset($_POST['submit'])) {
         echo "<meta http-equiv='refresh' content='0; url=index'>";
     } else {
         echo "Data anda gagal diubah. Ulangi sekali lagi";
-        echo "<meta http-equiv='refresh' content='0; url=edit?id=$id'>";
+        echo "<meta http-equiv='refresh' content='0; url=verif?id=$id'>";
     }
 }
 

@@ -88,24 +88,6 @@ $row = $query->fetch_array();
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Rohani</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="rohani" class="form-control" value="<?= $row['rohani'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Psikolog</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="psikolog" class="form-control" value="<?= $row['psikolog'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
                                         <select name="id_dokter" class="form-control select2" style="width: 100%;">
@@ -225,19 +207,12 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $rohani = $_POST['rohani'];
-    $psikolog = $_POST['psikolog'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
-
 
     $update = $con->query("UPDATE mcu_jiwa SET 
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        rohani = '$rohani',
-        psikolog = '$psikolog',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_jiwa = '$id'
     ");

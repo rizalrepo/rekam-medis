@@ -45,8 +45,8 @@ include_once '../../template/sidebar.php';
                                             <th>No</th>
                                             <th>Nama Pasien</th>
                                             <th>Waktu Periksa</th>
-                                            <th>Rohani</th>
-                                            <th>Psikolog</th>
+                                            <th>Keperluan</th>
+                                            <th>Verifikasi Dokter</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -61,8 +61,15 @@ include_once '../../template/sidebar.php';
                                                 <td align="center" width="5%"><?= $no++ ?></td>
                                                 <td><?= $row['nm_pasien'] ?></td>
                                                 <td align="center"><?= tgl_indo($row['tanggal']) ?></td>
-                                                <td><?= $row['rohani'] ?></td>
-                                                <td><?= $row['psikolog'] ?></td>
+                                                <td><?= $row['untuk'] ?></td>
+                                                <td align="center">
+                                                    <?php if ($row['verif'] == '1') {
+                                                        echo 'Terverifikasi';
+                                                    } else {
+                                                        echo 'Belum';
+                                                    }
+                                                    ?>
+                                                </td>
                                                 <td align="center" width="13%">
                                                     <a href="#id<?= $row[0]; ?>" data-toggle="modal" class="btn bg-purple btn-xs" title="Detail"><i class="fa fa-info-circle"></i></a>
                                                     <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
