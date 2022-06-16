@@ -2,7 +2,7 @@
 
 if (!isset($_SESSION['login'])) {
     echo "<script> alert('Silahkan login terlebih dahulu'); </script>";
-    echo "<meta http-equiv='refresh' content='0; url=" . base_url('login') . "'>";
+    echo "<meta http-equiv='refresh' content='0; url=" . base_url('index') . "'>";
 }
 
 ?>

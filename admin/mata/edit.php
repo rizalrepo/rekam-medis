@@ -87,7 +87,7 @@ $row = $query->fetch_array();
                                         <input type="date" class="form-control" name="tanggal" value="<?= $row['tanggal'] ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <!-- <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Buta Mata</label>
                                     <div class="col-sm-10">
                                         <input type="text" name="buta" class="form-control" value="<?= $row['buta'] ?>" required>
@@ -104,7 +104,7 @@ $row = $query->fetch_array();
                                     <div class="col-sm-10">
                                         <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
@@ -235,9 +235,6 @@ if (isset($_POST['submit'])) {
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        buta = '$buta',
-        cacat = '$cacat',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_mata = '$id'
     ");

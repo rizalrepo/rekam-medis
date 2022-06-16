@@ -83,24 +83,6 @@ include_once '../../template/sidebar.php';
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Buta Mata</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="buta" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Cacat Mata</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="cacat" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
                                         <select name="id_dokter" class="form-control select2" style="width: 100%;">
@@ -222,11 +204,12 @@ if (isset($_POST['submit'])) {
         '$id_pasien', 
         '$untuk', 
         '$tanggal', 
-        '$buta',
-        '$cacat',
-        '$catatan',
+        null,
+        null,
+        null,
         '$id_dokter',
-        '$user'
+        '$user',
+        0
     )");
 
     if ($tambah) {
