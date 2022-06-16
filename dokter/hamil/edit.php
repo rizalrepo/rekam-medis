@@ -83,13 +83,13 @@ $pst = [
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Untuk Keperluan</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="untuk" class="form-control" value="<?= $row['untuk'] ?>" required>
+                                        <input type="text" name="untuk" class="form-control" value="<?= $row['untuk'] ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
-                                        <input type="date" class="form-control" name="tanggal" value="<?= $row['tanggal'] ?>" required>
+                                        <input type="text" class="form-control" value="<?= tgl($row['tanggal']) ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -102,27 +102,6 @@ $pst = [
                                     <label class="col-sm-2 col-form-label">Catatan Dokter</label>
                                     <div class="col-sm-10">
                                         <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Nama Dokter</label>
-                                    <div class="col-sm-10">
-                                        <select name="id_dokter" class="form-control select2" style="width: 100%;">
-                                            <?php
-                                            $q = $con->query("SELECT * FROM dokter ORDER BY id_dokter DESC");
-                                            while ($d = $q->fetch_array()) {
-                                                if ($d['id_dokter'] == $row['id_dokter']) {
-                                            ?>
-                                                    <option value="<?= $d['id_dokter']; ?>" selected="<?= $d['id_dokter']; ?>"><?= $d['nm_dokter'] ?> | NIP. <?= $d['nip'] ?></option>
-                                                <?php
-                                                } else {
-                                                ?>
-                                                    <option value="<?= $d['id_dokter'] ?>"><?= $d['nm_dokter'] ?> | NIP. <?= $d['nip'] ?></option>
-                                            <?php
-                                                }
-                                            }
-                                            ?>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -143,99 +122,19 @@ $pst = [
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<div class="modal fade" id="modal_pasien" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pilih Pasien</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="table-responsive">
-                    <table id="example1" class="table table-bordered">
-                        <thead class="bg-lightblue">
-                            <tr align="center">
-                                <th>No</th>
-                                <th>Nomor Kartu</th>
-                                <th>Nama Pasien</th>
-                                <th>NIK</th>
-                                <th>Jenis Kelamin</th>
-                                <th>Jenis Pengobatan</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
 
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            $data = $con->query("SELECT * FROM pasien ORDER BY id_pasien ASC");
-                            while ($row = $data->fetch_array()) {
-                            ?>
-                                <tr>
-                                    <td align="center" width="5%"><?= $no++ ?></td>
-                                    <td align="center"><?= $row['no_kartu'] ?></td>
-                                    <td><?= $row['nm_pasien'] ?></td>
-                                    <td align="center"><?= $row['nik'] ?></td>
-                                    <td align="center"><?= $row['jk'] ?></td>
-                                    <td align="center"><?= $row['jp'] ?></td>
-                                    <td align="center" width="18%">
-                                        <button class="btn btn-xs btn-success" id="select" data-nm_pasien="<?= $row['nm_pasien'] ?>" data-id_pasien="<?= $row['id_pasien'] ?>" data-tmpt_lahir="<?= $row['tmpt_lahir']  ?>" data-tgl_lahir="<?= $row['tgl_lahir'] ?>" data-no_kartu="<?= $row['no_kartu'] ?>" data-jk="<?= $row['jk'] ?>" data-jp="<?= $row['jp'] ?>">
-                                            Pilih
-                                        </button>
-                                    </td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <?php
 include_once '../../template/footer.php';
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(document).on('click', '#select', function() {
-            var nm_pasien = $(this).data('nm_pasien');
-            var id_pasien = $(this).data('id_pasien');
-            var no_kartu = $(this).data('no_kartu');
-            var tmpt_lahir = $(this).data('tmpt_lahir');
-            var tgl_lahir = $(this).data('tgl_lahir');
-            var jk = $(this).data('jk');
-            var jp = $(this).data('jp');
-            $('#nm_pasien').val(nm_pasien);
-            $('#id_pasien').val(id_pasien);
-            $('#no_kartu').val(no_kartu);
-            $('#tmpt_lahir').val(tmpt_lahir);
-            $('#tgl_lahir').val(tgl_lahir);
-            $('#jk').val(jk);
-            $('#jp').val(jp);
-            $('#modal_pasien').modal('hide');
-        });
-    })
-</script>
 <?php
 if (isset($_POST['submit'])) {
-    $id_pasien = $_POST['id_pasien'];
-    $untuk = $_POST['untuk'];
-    $tanggal = $_POST['tanggal'];
+
     $pst = $_POST['pst'];
     $catatan = $_POST['catatan'];
-    $id_dokter = $_POST['id_dokter'];
-
 
     $update = $con->query("UPDATE mcu_hamil SET 
-        id_pasien = '$id_pasien',
-        untuk = '$untuk',
-        tanggal = '$tanggal',
         pst = '$pst',
-        catatan = '$catatan',
-        id_dokter = '$id_dokter'
+        catatan = '$catatan'
         WHERE id_mcu_hamil = '$id'
     ");
 

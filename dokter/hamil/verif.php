@@ -4,23 +4,13 @@ include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
 $id = $_GET['id'];
-$query = $con->query(" SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_mcu_fisik ='$id'");
+$query = $con->query(" SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_mcu_hamil ='$id'");
 $row = $query->fetch_array();
 
-$tatto = [
+$pst = [
     '' => '-- Pilih --',
-    'Bertatto' => 'Bertatto',
-    'Tidak Bertatto' => 'Tidak Bertatto',
-];
-$cacat = [
-    '' => '-- Pilih --',
-    'Ada' => 'Ada',
-    'Tidak Ada' => 'Tidak Ada',
-];
-$terbang = [
-    '' => '-- Pilih --',
-    'Laik Terbang' => 'Laik Terbang',
-    'Tidak Laik Terbang' => 'Tidak Laik Terbang',
+    'Negatif' => 'Negatif',
+    'Positif' => 'Positif',
 ];
 ?>
 <!-- Content Wrapper. Contains page content -->
@@ -30,7 +20,7 @@ $terbang = [
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark"><i class="mdi mdi-human-greeting ml-1 mr-1"></i> Edit Data Diagnosa Jantung & Fisik</h4>
+                    <h4 class="m-0 text-dark"><i class="mdi mdi-human-pregnant ml-1 mr-1"></i> Verifikasi Data Diagnosa Kehamilan</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 float-right">
                     <a href="#" onClick="history.go(-1);" class="btn btn-xs bg-dark float-right"><i class="fa fa-arrow-left"> Kembali</i></a>
@@ -99,31 +89,13 @@ $terbang = [
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="tanggal" value="<?= tgl($row['tanggal']) ?>" readonly>
+                                        <input type="text" class="form-control" value="<?= tgl($row['tanggal']) ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">EKG</label>
+                                    <label class="col-sm-2 col-form-label">PST</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="ekg" value="<?= $row['ekg'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tatto</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('tatto', $tatto, $row['tatto'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Cacat Fisik</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('cacat', $cacat, $row['cacat'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Laik Terbang</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('terbang', $terbang, $row['terbang'], 'class="form-control" required') ?>
+                                        <?= form_dropdown('pst', $pst, $row['pst'], 'class="form-control" required') ?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -134,7 +106,7 @@ $terbang = [
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Update</i></button>
+                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Verifikasi</i></button>
                                         <button type="reset" class="btn btn-sm btn-danger float-right mr-1"><i class="fa fa-times-circle"> Batal</i></button>
                                     </div>
                                 </div>
@@ -157,21 +129,14 @@ include_once '../../template/footer.php';
 <?php
 if (isset($_POST['submit'])) {
 
-    $ekg = $_POST['ekg'];
-    $tatto = $_POST['tatto'];
-    $cacat = $_POST['cacat'];
-    $terbang = $_POST['terbang'];
+    $pst = $_POST['pst'];
     $catatan = $_POST['catatan'];
 
-
-    $update = $con->query("UPDATE mcu_fisik SET 
-    
-        ekg = '$ekg',
-        tatto = '$tatto',
-        cacat = '$cacat',
-        terbang = '$terbang',
-        catatan = '$catatan'
-        WHERE id_mcu_fisik = '$id'
+    $update = $con->query("UPDATE mcu_hamil SET 
+        pst = '$pst',
+        catatan = '$catatan',
+        verif = 1
+        WHERE id_mcu_hamil = '$id'
     ");
 
     if ($update) {
@@ -179,7 +144,7 @@ if (isset($_POST['submit'])) {
         echo "<meta http-equiv='refresh' content='0; url=index'>";
     } else {
         echo "Data anda gagal diubah. Ulangi sekali lagi";
-        echo "<meta http-equiv='refresh' content='0; url=edit?id=$id'>";
+        echo "<meta http-equiv='refresh' content='0; url=verif?id=$id'>";
     }
 }
 

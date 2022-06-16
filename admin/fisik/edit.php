@@ -7,21 +7,6 @@ $id = $_GET['id'];
 $query = $con->query(" SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_mcu_fisik ='$id'");
 $row = $query->fetch_array();
 
-$tatto = [
-    '' => '-- Pilih --',
-    'Bertatto' => 'Bertatto',
-    'Tidak Bertatto' => 'Tidak Bertatto',
-];
-$cacat = [
-    '' => '-- Pilih --',
-    'Ada' => 'Ada',
-    'Tidak Ada' => 'Tidak Ada',
-];
-$terbang = [
-    '' => '-- Pilih --',
-    'Laik Terbang' => 'Laik Terbang',
-    'Tidak Laik Terbang' => 'Tidak Laik Terbang',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -100,36 +85,6 @@ $terbang = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= $row['tanggal'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">EKG</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="ekg" value="<?= $row['ekg'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tatto</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('tatto', $tatto, $row['tatto'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Cacat Fisik</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('cacat', $cacat, $row['cacat'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Laik Terbang</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('terbang', $terbang, $row['terbang'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -252,11 +207,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $ekg = $_POST['ekg'];
-    $tatto = $_POST['tatto'];
-    $cacat = $_POST['cacat'];
-    $terbang = $_POST['terbang'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
 
 
@@ -264,11 +214,6 @@ if (isset($_POST['submit'])) {
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        ekg = '$ekg',
-        tatto = '$tatto',
-        cacat = '$cacat',
-        terbang = '$terbang',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_fisik = '$id'
     ");

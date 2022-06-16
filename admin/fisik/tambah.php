@@ -3,21 +3,6 @@ require '../../app/config.php';
 include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
-$tatto = [
-    '' => '-- Pilih --',
-    'Bertatto' => 'Bertatto',
-    'Tidak Bertatto' => 'Tidak Bertatto',
-];
-$cacat = [
-    '' => '-- Pilih --',
-    'Ada' => 'Ada',
-    'Tidak Ada' => 'Tidak Ada',
-];
-$terbang = [
-    '' => '-- Pilih --',
-    'Laik Terbang' => 'Laik Terbang',
-    'Tidak Laik Terbang' => 'Tidak Laik Terbang',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -96,36 +81,6 @@ $terbang = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d') ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">EKG</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" name="ekg" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tatto</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('tatto', $tatto, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Cacat Fisik</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('cacat', $cacat, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Laik Terbang</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('terbang', $terbang, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -239,26 +194,22 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $ekg = $_POST['ekg'];
-    $tatto = $_POST['tatto'];
-    $cacat = $_POST['cacat'];
-    $terbang = $_POST['terbang'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
     $user = $_SESSION['id_user'];
 
     $tambah = $con->query("INSERT INTO mcu_fisik VALUES (
-        '',
+        default,
         '$id_pasien', 
         '$untuk', 
         '$tanggal', 
-        '$ekg',
-        '$tatto',
-        '$cacat',
-        '$terbang',
-        '$catatan',
+        null,
+        null,
+        null,
+        null,
+        null,
         '$id_dokter',
-        '$user'
+        '$user',
+        0
     )");
 
     if ($tambah) {

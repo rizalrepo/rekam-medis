@@ -3,11 +3,6 @@ require '../../app/config.php';
 include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
-$pst = [
-    '' => '-- Pilih --',
-    'Negatif' => 'Negatif',
-    'Positif' => 'Positif',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -86,18 +81,6 @@ $pst = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d') ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">PST</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('pst', $pst, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -211,8 +194,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $pst = $_POST['pst'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
     $user = $_SESSION['id_user'];
 
@@ -221,10 +202,11 @@ if (isset($_POST['submit'])) {
         '$id_pasien', 
         '$untuk', 
         '$tanggal', 
-        '$pst',
-        '$catatan',
+        null,
+        null,
         '$id_dokter',
-        '$user'
+        '$user',
+        0
     )");
 
     if ($tambah) {

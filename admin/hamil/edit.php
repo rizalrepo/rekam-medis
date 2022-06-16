@@ -7,11 +7,6 @@ $id = $_GET['id'];
 $query = $con->query(" SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_mcu_hamil ='$id'");
 $row = $query->fetch_array();
 
-$pst = [
-    '' => '-- Pilih --',
-    'Negatif' => 'Negatif',
-    'Positif' => 'Positif',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -90,18 +85,6 @@ $pst = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= $row['tanggal'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">PST</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('pst', $pst, $row['pst'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -224,8 +207,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $pst = $_POST['pst'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
 
 
@@ -233,8 +214,6 @@ if (isset($_POST['submit'])) {
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        pst = '$pst',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_hamil = '$id'
     ");
