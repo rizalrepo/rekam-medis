@@ -5,10 +5,9 @@ include_once '../../template/sidebar.php';
 include_once '../../template/footer.php';
 
 $id = $_GET['id'];
-
-$query = $con->query(" DELETE FROM dokter WHERE id_dokter = '$id' ");
+$query = $con->query(" DELETE FROM rm WHERE id_rm = '$id' ");
 if ($query) {
-    $con->query("DELETE FROM user WHERE id_dokter = '$id' ");
+    $con->query(" DELETE FROM rm_obat WHERE id_rm = '$id' ");
     $_SESSION['pesan'] = "Data Berhasil di Hapus";
     echo "<meta http-equiv='refresh' content='0; url=index'>";
 } else {

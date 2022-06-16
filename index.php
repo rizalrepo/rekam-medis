@@ -95,21 +95,40 @@ if (isset($_POST['log'])) {
         $_SESSION['id_user'] = $id;
         $_SESSION['level'] = $level;
         $_SESSION['nm_user'] = $usr;
-        echo "
-        <script type='text/javascript'>
-            setTimeout(function () {    
-                swal({
-                    title: 'Login Berhasil',
-                    text:  'Anda Login Sebagai $usr',
-                    type: 'success',
-                    timer: 2000,
-                    showConfirmButton: false
-                });     
-            },10);  
-            window.setTimeout(function(){ 
-                window.location.replace('admin/');
-            } ,2000);   
-        </script>";
+
+        if ($level != 3) {
+            echo "
+            <script type='text/javascript'>
+                setTimeout(function () {    
+                    swal({
+                        title: 'Login Berhasil',
+                        text:  'Anda Login Sebagai $usr',
+                        type: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });     
+                },10);  
+                window.setTimeout(function(){ 
+                    window.location.replace('admin/');
+                } ,2000);   
+            </script>";
+        } else {
+            echo "
+            <script type='text/javascript'>
+                setTimeout(function () {    
+                    swal({
+                        title: 'Login Berhasil',
+                        text:  'Anda Login Sebagai $usr',
+                        type: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });     
+                },10);  
+                window.setTimeout(function(){ 
+                    window.location.replace('dokter/');
+                } ,2000);   
+            </script>";
+        }
     } else {
         echo "
         <script type='text/javascript'>
@@ -123,7 +142,7 @@ if (isset($_POST['log'])) {
                 });     
             },10);  
             window.setTimeout(function(){ 
-                window.location.replace('login');
+                window.location.replace('index');
             } ,2000);   
         </script>";
     }

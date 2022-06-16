@@ -13,43 +13,43 @@ if (isset($_POST['cetak'])) {
     $cekid_dokter = isset($id_dokter);
     if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_dokter == null) {
 
-        $sql = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY id_mcu_fisik DESC");
-        $label = 'LAPORAN DATA MCU JANTUNG & FISIK <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
+        $sql = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' ORDER BY id_mcu_hamil DESC");
+        $label = 'LAPORAN DATA MCU KEHAMILAN <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2);
 
-        $sql1 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Laki-laki' ORDER BY id_mcu_fisik DESC");
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Laki-laki' ORDER BY id_mcu_hamil DESC");
 
-        $sql2 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Perempuan' ORDER BY id_mcu_fisik DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND jk = 'Perempuan' ORDER BY id_mcu_hamil DESC");
 
         $num1 = mysqli_num_rows($sql1);
         $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == $cekid_dokter) {
-        $sql = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' ORDER BY id_mcu_fisik DESC");
+        $sql = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' ORDER BY id_mcu_hamil DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
-        $label = 'LAPORAN DATA MCU JANTUNG & FISIK <br> Dokter : ' . $dt['nm_dokter'];
+        $label = 'LAPORAN DATA MCU KEHAMILAN <br> Dokter : ' . $dt['nm_dokter'];
 
-        $sql1 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_fisik DESC");
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_hamil DESC");
 
-        $sql2 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_fisik DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_hamil DESC");
 
         $num1 = mysqli_num_rows($sql1);
         $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == $cektgl1 && $tgl2 == $cektgl2 && $id_dokter == $cekid_dokter) {
-        $sql = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' ORDER BY id_mcu_fisik DESC");
+        $sql = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' ORDER BY id_mcu_hamil DESC");
         $dt = $con->query("SELECT * FROM dokter WHERE id_dokter = '$id_dokter'")->fetch_array();
-        $label = 'LAPORAN DATA MCU JANTUNG & FISIK <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Dokter : ' . $dt['nm_dokter'];
+        $label = 'LAPORAN DATA MCU KEHAMILAN <br> Tanggal : ' . tgl($tgl1) . ' s/d ' . tgl($tgl2) . '<br> Dokter : ' . $dt['nm_dokter'];
 
-        $sql1 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_fisik DESC");
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Laki-laki' ORDER BY id_mcu_hamil DESC");
 
-        $sql2 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_fisik DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE m.tanggal BETWEEN '$tgl1' AND '$tgl2' AND m.id_dokter = '$id_dokter' AND jk = 'Perempuan' ORDER BY id_mcu_hamil DESC");
 
         $num1 = mysqli_num_rows($sql1);
         $num2 = mysqli_num_rows($sql2);
     } else if ($tgl1 == null && $tgl2 == null && $id_dokter == null) {
-        $sql = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter ORDER BY id_mcu_fisik DESC");
-        $label = 'LAPORAN DATA MCU JANTUNG & FISIK';
+        $sql = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter ORDER BY id_mcu_hamil DESC");
+        $label = 'LAPORAN DATA MCU KEHAMILAN';
 
-        $sql1 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Laki-laki' ORDER BY id_mcu_fisik DESC");
-        $sql2 = mysqli_query($con, "SELECT * FROM mcu_fisik m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Perempuan' ORDER BY id_mcu_fisik DESC");
+        $sql1 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Laki-laki' ORDER BY id_mcu_hamil DESC");
+        $sql2 = mysqli_query($con, "SELECT * FROM mcu_hamil m JOIN pasien p ON p.id_pasien = m.id_pasien JOIN dokter d ON d.id_dokter = m.id_dokter WHERE jk = 'Perempuan' ORDER BY id_mcu_hamil DESC");
 
         $num1 = mysqli_num_rows($sql1);
         $num2 = mysqli_num_rows($sql2);
@@ -57,7 +57,7 @@ if (isset($_POST['cetak'])) {
 }
 
 require_once '../../assets/vendor/autoload.php';
-$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [400, 210]]);
+$mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'LEGAL-L']);
 ob_start();
 ?>
 
@@ -69,7 +69,7 @@ ob_start();
 <html>
 
 <head>
-    <title>Laporan Data MCU Jantung & Fisik</title>
+    <title>Laporan Data MCU Kehamilan</title>
 </head>
 
 <style>
@@ -115,10 +115,7 @@ ob_start();
                             <th>Usia</th>
                             <th>Untuk Keperluan</th>
                             <th>Waktu Periksa</th>
-                            <!-- <th>EKG</th> -->
-                            <th>Tatto</th>
-                            <th>Cacat Fisik</th>
-                            <!-- <th>Laik Terbang</th> -->
+                            <th>PST</th>
                             <th>Catatan Dokter</th>
                             <th>Nama Dokter</th>
                         </tr>
@@ -137,10 +134,7 @@ ob_start();
                                 <td align="center"><?= $y . ' Tahun' ?></td>
                                 <td><?= $data['untuk'] ?></td>
                                 <td align="center"><?= tgl_indo($data['tanggal']) ?></td>
-                                <!-- <td align="center"><?= $data['ekg'] ?></td> -->
-                                <td align="center"><?= $data['tatto'] ?></td>
-                                <td align="center"><?= $data['cacat'] ?></td>
-                                <!-- <td align="center"><?= $data['terbang'] ?></td> -->
+                                <td align="center"><?= $data['pst'] ?></td>
                                 <td><?= $data['catatan'] ?></td>
                                 <td><?= $data['nm_dokter'] ?></td>
                             </tr>

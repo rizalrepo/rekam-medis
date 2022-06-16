@@ -223,6 +223,79 @@ function menu($pageSekarang)
                             </li>
                         </ul>
                     </li>
+                <?php } else if ($_SESSION['level'] == 3) { ?>
+                    <li class="nav-item">
+                        <a href="<?= base_url() ?>/dokter/" class="nav-link <?= aktif("dokter") ?>">
+                            <i class="nav-icon fa fa-tachometer-alt"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="<?= base_url() ?>/dokter/rm" class="nav-link <?= aktif("rm") ?>">
+                            <i class="nav-icon fa fa-stethoscope"></i>
+                            <p>
+                                Data Rekam Medis
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item has-treeview <?= menu('mata') ?> <?= menu('jiwa') ?> <?= menu('sehat') ?> <?= menu('virus') ?> <?= menu('hamil') ?> <?= menu('fisik') ?> <?= menu('napza') ?>">
+                        <a href="#" class="nav-link <?= aktif('mata') ?> <?= aktif('jiwa') ?> <?= aktif('sehat') ?> <?= aktif('virus') ?> <?= aktif('hamil') ?> <?= aktif('fisik') ?> <?= aktif('napza') ?>">
+                            <i class="nav-icon fa fa-calendar-check"></i>
+                            <p>
+                                Data MCU
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/mata/" class="nav-link <?= aktif('mata') ?>">
+                                    <i class="fas fa-eye mr-1"></i>
+                                    <p>Diagnosa Mata</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/jiwa/" class="nav-link <?= aktif('jiwa') ?>">
+                                    <i class="fas fa-heartbeat mr-1"></i>
+                                    <p>Diagnosa Jiwa/Psikolog</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/sehat/" class="nav-link <?= aktif('sehat') ?>">
+                                    <i class="fas fa-plus-square mr-1"></i>
+                                    <p>Diagnosa Keterangan Sehat</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/napza/" class="nav-link <?= aktif('napza') ?>">
+                                    <i class="mdi mdi-human-handsup mr-1"></i>
+                                    <p>Diagnosa NAPZA</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/virus/" class="nav-link <?= aktif('virus') ?>">
+                                    <i class="mdi mdi-virus mr-1"></i>
+                                    <p>Diagnosa Virus</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/hamil/" class="nav-link <?= aktif('hamil') ?>">
+                                    <i class="mdi mdi-human-pregnant mr-1"></i>
+                                    <p>Diagnosa Kehamilan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="<?= base_url() ?>/dokter/fisik/" class="nav-link <?= aktif('fisik') ?>">
+                                    <i class="mdi mdi-human-greeting mr-1"></i>
+                                    <p>Diagnosa Jantung & Fisik</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 <?php } else { ?>
 
                     <li class="nav-item">

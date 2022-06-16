@@ -141,6 +141,24 @@ if (isset($_POST['submit'])) {
     ");
 
     if ($update) {
+        $dt = $con->query("SELECT * FROM user WHERE id_dokter = '$id' ")->fetch_array();
+        if (!empty($dt['id_dokter'])) {
+            $con->query("UPDATE user SET 
+                nm_user = '$nm_dokter',
+                username = '$nip'
+                WHERE id_dokter = '$id' 
+            ");
+        } else {
+            $pw = md5(123456);
+            $con->query("INSERT INTO user VALUES (
+                default,
+                $id,
+                '$nm_dokter', 
+                '$nip', 
+                '$pw', 
+                3
+            )");
+        }
         $_SESSION['pesan'] = "Data Berhasil di Update";
         echo "<meta http-equiv='refresh' content='0; url=index'>";
     } else {

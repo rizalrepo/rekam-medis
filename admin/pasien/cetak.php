@@ -86,10 +86,10 @@ ob_start();
                             <th>Pekerjaan</th>
                             <th>Alamat</th>
                             <th>Pengobatan</th>
-                            <th>Nomor BPJS</th>
+                            <!-- <th>Nomor BPJS</th> -->
                             <th>Poli</th>
                             <th>Nomor HP</th>
-                            <th>Tanggal Input</th>
+                            <!-- <th>Tanggal Input</th> -->
                         </tr>
                     </thead>
 
@@ -109,16 +109,16 @@ ob_start();
                                 <td align="center"><?= $data['pekerjaan'] ?></td>
                                 <td><?= $data['alamat'] ?></td>
                                 <td align="center"><?= $data['jp'] ?></td>
-                                <td align="center">
+                                <!-- <td align="center">
                                     <?php if ($data['jp'] == 'BPJS') {
                                         echo $data['bpjs'];
                                     } else {
                                         echo '-';
                                     } ?>
-                                </td>
+                                </td> -->
                                 <td align="center"><?= $data['nm_poli'] ?></td>
                                 <td align="center"><?= $data['hp'] ?></td>
-                                <td align="center"><?= tgl($data['tgl_input']) ?></td>
+                                <!-- <td align="center"><?= tgl($data['tgl_input']) ?></td> -->
                             </tr>
                         <?php } ?>
                     </tbody>

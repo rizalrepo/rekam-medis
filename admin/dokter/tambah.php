@@ -139,6 +139,16 @@ if (isset($_POST['submit'])) {
     )");
 
     if ($tambah) {
+        $dt = mysqli_insert_id($con);
+        $pw = md5(123456);
+        $con->query("INSERT INTO user VALUES (
+            default,
+            $dt,
+            '$nm_dokter', 
+            '$nip', 
+            '$pw', 
+            3
+        )");
         $_SESSION['pesan'] = "Data Berhasil di Simpan";
         echo "<meta http-equiv='refresh' content='0; url=index'>";
     } else {

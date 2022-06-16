@@ -57,7 +57,7 @@ $level = [
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Password</label>
                                     <div class="input-group col-sm-10">
-                                        <input type="password" id="pw" class="form-control" name="password" required>
+                                        <input type="password" id="pw" class="form-control" name="password">
                                         <div class="input-group-append">
                                             <div class="input-group-text" id="lihatpw">
                                                 <span class="fas fa-eye" title="Lihat Password" onclick="change1();"></span>
@@ -72,12 +72,14 @@ $level = [
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Level Pengguna</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('level', $level, $row['level'], 'class="form-control" required') ?>
+                                <?php if ($row['level'] != 3) { ?>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">Level Pengguna</label>
+                                        <div class="col-sm-10">
+                                            <?= form_dropdown('level', $level, $row['level'], 'class="form-control" required') ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php } ?>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
                                         <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Update</i></button>
@@ -124,7 +126,11 @@ if (isset($_POST['submit'])) {
     } else {
         $pw = $row['password'];
     }
-    $level = $_POST['level'];
+    if (!empty($_POST['level'])) {
+        $level = $_POST['password'];
+    } else {
+        $level = $row['level'];
+    }
 
     $update = $con->query("UPDATE user SET 
         nm_user = '$nama', 

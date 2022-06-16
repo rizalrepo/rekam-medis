@@ -2,6 +2,7 @@
 require '../../app/config.php';
 include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
+$log = $con->query("SELECT * FROM user WHERE id_user = '$_SESSION[id_user]' ")->fetch_array();
 ?>
 
 
@@ -12,10 +13,12 @@ include_once '../../template/sidebar.php';
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark"><i class="fa fa-user ml-1 mr-1"></i> Data Pengguna</h4>
+                    <h4 class="m-0 text-dark"><i class="fa fa-stethoscope ml-1 mr-1"></i> Data Rekam Medis</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 text-right">
-                    <a href="tambah" class="btn btn-sm bg-dark"><i class="fa fa-plus-circle"> Tambah Data</i></a>
+                    <?php if ($_SESSION['level'] == 2) { ?>
+                        <a href="tambah" class="btn btn-sm bg-dark"><i class="fa fa-plus-circle"> Tambah Data</i></a>
+                    <?php } ?>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -36,15 +39,17 @@ include_once '../../template/sidebar.php';
                                 <div id="notif" class="alert bg-teal" role="alert"><i class="fa fa-check-circle mr-2"></i><b><?= $_SESSION['pesan'] ?></b></div>
                             <?php $_SESSION['pesan'] = '';
                             } ?>
-
                             <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped dataTable">
                                     <thead class="bg-olive">
                                         <tr align="center">
                                             <th>No</th>
-                                            <th>Nama Pengguna</th>
-                                            <th>Username</th>
-                                            <th>Level</th>
+                                            <th>Kode RM</th>
+                                            <th>Nama Pasien</th>
+                                            <th>Waktu Periksa</th>
+                                            <th>Keluhan</th>
+                                            <th>Diagnosis</th>
+                                            <th>Obat</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -52,29 +57,22 @@ include_once '../../template/sidebar.php';
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $data = $con->query("SELECT * FROM user ORDER BY id_user DESC");
+                                        $data = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_dokter = '$log[id_dokter]' ORDER BY id_rm DESC");
                                         while ($row = $data->fetch_array()) {
                                         ?>
                                             <tr>
                                                 <td align="center" width="5%"><?= $no++ ?></td>
-                                                <td><?= $row['nm_user'] ?></td>
-                                                <td><?= $row['username'] ?></td>
-                                                <td align="center">
-                                                    <?php
-                                                    if ($row['level'] == 1) {
-                                                        echo 'Admin';
-                                                    } else if ($row['level'] == 2) {
-                                                        echo 'Petugas';
-                                                    } else {
-                                                        echo 'Dokter';
-                                                    }
-                                                    ?>
-                                                </td>
-                                                <td align="center" width="18%">
-                                                    <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i> Edit</a>
-                                                    <?php if ($row['level'] == 1 || $row['level'] == 2) { ?>
-                                                        <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i> Hapus</a>
-                                                    <?php } ?>
+                                                <td align="center"><?= $row['id_rm'] ?></td>
+                                                <td><?= $row['nm_pasien'] ?></td>
+                                                <td align="center"><?= tgl_indo($row['tanggal']) ?></td>
+                                                <td><?= $row['keluhan'] ?></td>
+                                                <td><?= $row['diagnosis'] ?></td>
+                                                <td align="center" width="10%"> <a href="obat?id=<?= $row[0] ?>" class="btn bg-primary btn-xs"><i class="fa fa-pills"></i> Lihat</a></td>
+                                                <td align="center" width="13%">
+                                                    <a href="#id<?= $row[0]; ?>" data-toggle="modal" class="btn bg-purple btn-xs" title="Detail"><i class="fa fa-info-circle"></i></a>
+                                                    <a href="edit?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a href="hapus?id=<?= $row[0] ?>" class="btn btn-danger btn-xs alert-hapus" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                    <?php include 'detail.php' ?>
                                                 </td>
                                             </tr>
                                         <?php } ?>
