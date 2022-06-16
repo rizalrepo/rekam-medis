@@ -7,36 +7,6 @@ $id = $_GET['id'];
 $query = $con->query(" SELECT * FROM mcu_napza m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_mcu_napza ='$id'");
 $row = $query->fetch_array();
 
-$methamphetamine = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
-$amphetamine = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
-$benzodiazepine = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
-$thc = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
-$morphine = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
-$cocaine = [
-    '' => '-- Pilih --',
-    'Non Reaktif' => 'Non Reaktif',
-    'Reaktif' => 'Reaktif',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -115,54 +85,6 @@ $cocaine = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= $row['tanggal'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Methamphetamine</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('methamphetamine', $methamphetamine, $row['methamphetamine'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Amphetamine</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('amphetamine', $amphetamine, $row['amphetamine'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Benzodiazepine</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('benzodiazepine', $benzodiazepine, $row['benzodiazepine'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">THC</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('thc', $thc, $row['thc'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Morphine</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('morphine', $morphine, $row['morphine'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Cocaine</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('cocaine', $cocaine, $row['cocaine'], 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Hasil</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="hasil" class="form-control" value="<?= $row['hasil'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -285,14 +207,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $methamphetamine = $_POST['methamphetamine'];
-    $amphetamine = $_POST['amphetamine'];
-    $benzodiazepine = $_POST['benzodiazepine'];
-    $thc = $_POST['thc'];
-    $morphine = $_POST['morphine'];
-    $cocaine = $_POST['cocaine'];
-    $hasil = $_POST['hasil'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
 
 
@@ -300,14 +214,6 @@ if (isset($_POST['submit'])) {
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        methamphetamine = '$methamphetamine',
-        amphetamine = '$amphetamine',
-        benzodiazepine = '$benzodiazepine',
-        thc = '$thc',
-        morphine = '$morphine',
-        cocaine = '$cocaine',
-        hasil = '$hasil',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_napza = '$id'
     ");
