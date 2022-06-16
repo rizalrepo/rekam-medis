@@ -83,54 +83,6 @@ include_once '../../template/sidebar.php';
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tekanan Darah</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="tekanan" class="form-control" placeholder="Contoh : 120/80" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tinggi Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="tinggi" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Berat Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="berat" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Nadi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="nadi" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Respirasi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="respirasi" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Suhu Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="suhu" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Hasil</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="hasil" class="form-control" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
                                         <select name="id_dokter" class="form-control select2" style="width: 100%;">
@@ -257,16 +209,17 @@ if (isset($_POST['submit'])) {
         '$id_pasien', 
         '$untuk', 
         '$tanggal', 
-        '$tekanan',
-        '$tinggi',
-        '$berat',
-        '$nadi',
-        '$respirasi',
-        '$suhu',
-        '$hasil',
-        '$catatan',
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
         '$id_dokter',
-        '$user'
+        '$user',
+        0
     )");
 
     if ($tambah) {

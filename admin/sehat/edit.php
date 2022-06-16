@@ -88,54 +88,6 @@ $row = $query->fetch_array();
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tekanan Darah</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="tekanan" class="form-control" placeholder="Contoh : 120/80" required value="<?= $row['tekanan'] ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tinggi Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="tinggi" class="form-control" value="<?= $row['tinggi'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Berat Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="berat" class="form-control" value="<?= $row['berat'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Nadi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="nadi" class="form-control" value="<?= $row['nadi'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Respirasi</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="respirasi" class="form-control" value="<?= $row['respirasi'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Suhu Badan</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="suhu" class="form-control" value="<?= $row['suhu'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Hasil</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="hasil" class="form-control" value="<?= $row['hasil'] ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required><?= $row['catatan'] ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
                                         <select name="id_dokter" class="form-control select2" style="width: 100%;">
@@ -255,14 +207,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $tekanan = $_POST['tekanan'];
-    $tinggi = $_POST['tinggi'];
-    $berat = $_POST['berat'];
-    $nadi = $_POST['nadi'];
-    $respirasi = $_POST['respirasi'];
-    $suhu = $_POST['suhu'];
-    $hasil = $_POST['hasil'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
 
 
@@ -270,14 +214,6 @@ if (isset($_POST['submit'])) {
         id_pasien = '$id_pasien',
         untuk = '$untuk',
         tanggal = '$tanggal',
-        tekanan = '$tekanan',
-        tinggi = '$tinggi',
-        berat = '$berat',
-        nadi = '$nadi',
-        respirasi = '$respirasi',
-        suhu = '$suhu',
-        hasil = '$hasil',
-        catatan = '$catatan',
         id_dokter = '$id_dokter'
         WHERE id_mcu_sehat = '$id'
     ");
