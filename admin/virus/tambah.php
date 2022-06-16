@@ -3,23 +3,6 @@ require '../../app/config.php';
 include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
-$covid = [
-    '' => '-- Pilih --',
-    'Reaktif' => 'Reaktif',
-    'Non Reaktif' => 'Non Reaktif',
-];
-
-$hepatitis = [
-    '' => '-- Pilih --',
-    'Reaktif' => 'Reaktif',
-    'Non Reaktif' => 'Non Reaktif',
-];
-
-$hiv = [
-    '' => '-- Pilih --',
-    'Reaktif' => 'Reaktif',
-    'Non Reaktif' => 'Non Reaktif',
-];
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -98,30 +81,6 @@ $hiv = [
                                     <label class="col-sm-2 col-form-label">Tanggal Periksa</label>
                                     <div class="col-sm-10">
                                         <input type="date" class="form-control" name="tanggal" value="<?= date('Y-m-d') ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Covid 19</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('covid', $covid, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Hepatitis</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('hepatitis', $hepatitis, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">HIV</label>
-                                    <div class="col-sm-10">
-                                        <?= form_dropdown('hiv', $hiv, '', 'class="form-control" required') ?>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Catatan Dokter</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="catatan" class="form-control" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -235,10 +194,6 @@ if (isset($_POST['submit'])) {
     $id_pasien = $_POST['id_pasien'];
     $untuk = $_POST['untuk'];
     $tanggal = $_POST['tanggal'];
-    $covid = $_POST['covid'];
-    $hepatitis = $_POST['hepatitis'];
-    $hiv = $_POST['hiv'];
-    $catatan = $_POST['catatan'];
     $id_dokter = $_POST['id_dokter'];
     $user = $_SESSION['id_user'];
 
@@ -247,12 +202,13 @@ if (isset($_POST['submit'])) {
         '$id_pasien', 
         '$untuk', 
         '$tanggal', 
-        '$covid',
-        '$hepatitis',
-        '$hiv',
-        '$catatan',
+        null,
+        null,
+        null,
+        null,
         '$id_dokter',
-        '$user'
+        '$user',
+        0
     )");
 
     if ($tambah) {

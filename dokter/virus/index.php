@@ -2,6 +2,7 @@
 require '../../app/config.php';
 include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
+$log = $con->query("SELECT * FROM user WHERE id_user = '$_SESSION[id_user]' ")->fetch_array();
 ?>
 
 
@@ -39,6 +40,41 @@ include_once '../../template/sidebar.php';
                             <?php $_SESSION['pesan'] = '';
                             } ?>
                             <div class="table-responsive">
+                                <table class="table table-bordered table-striped dataTable">
+                                    <thead class="bg-olive">
+                                        <tr align="center">
+                                            <th>No</th>
+                                            <th>Nama Pasien</th>
+                                            <th>Waktu Periksa</th>
+                                            <th>Keperluan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        $data = $con->query("SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_dokter = '$log[id_dokter]' AND verif = 0 ORDER BY id_mcu_virus DESC");
+                                        while ($row = $data->fetch_array()) {
+                                        ?>
+                                            <tr>
+                                                <td align="center" width="5%"><?= $no++ ?></td>
+                                                <td><?= $row['nm_pasien'] ?></td>
+                                                <td align="center"><?= tgl_indo($row['tanggal']) ?></td>
+                                                <td><?= $row['untuk'] ?></td>
+                                                <td align="center" width="13%">
+                                                    <a href="#id<?= $row[0]; ?>" data-toggle="modal" class="btn bg-purple btn-xs" title="Detail"><i class="fa fa-info-circle"></i></a>
+                                                    <a href="verif?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Verifikasi"><i class="fa fa-check-circle"></i></a>
+                                                    <?php include 'detail.php' ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped dataTable">
                                     <thead class="bg-olive">
                                         <tr align="center">
@@ -55,7 +91,7 @@ include_once '../../template/sidebar.php';
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $data = $con->query("SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien ORDER BY id_mcu_virus DESC");
+                                        $data = $con->query("SELECT * FROM mcu_virus m JOIN pasien p ON p.id_pasien = m.id_pasien WHERE id_dokter = '$log[id_dokter]' AND verif = 1 ORDER BY id_mcu_virus DESC");
                                         while ($row = $data->fetch_array()) {
                                         ?>
                                             <tr>
