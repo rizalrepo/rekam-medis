@@ -16,7 +16,7 @@ $qry = $con->query(" SELECT * FROM rm r JOIN poli p ON p.id_poli = r.id_poli WHE
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-6">
-                    <h4 class="m-0 text-dark"><i class="fa fa-stethoscope ml-1 mr-1"></i> Edit Data Rekam Medis</h4>
+                    <h4 class="m-0 text-dark"><i class="fa fa-stethoscope ml-1 mr-1"></i> Verifikasi Data Rekam Medis</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 float-right">
                     <a href="#" onClick="history.go(-1);" class="btn btn-xs bg-dark float-right"><i class="fa fa-arrow-left"> Kembali</i></a>
@@ -111,7 +111,7 @@ $qry = $con->query(" SELECT * FROM rm r JOIN poli p ON p.id_poli = r.id_poli WHE
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-12">
-                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Update</i></button>
+                                        <button type="submit" name="submit" class="btn btn-sm bg-cyan float-right"><i class="fa fa-save"> Verifikasi</i></button>
                                         <button type="reset" class="btn btn-sm btn-danger float-right mr-1"><i class="fa fa-times-circle"> Batal</i></button>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@ if (isset($_POST['submit'])) {
         echo "<meta http-equiv='refresh' content='0; url=index'>";
     } else {
         echo "Data anda gagal diubah. Ulangi sekali lagi";
-        echo "<meta http-equiv='refresh' content='0; url=edit?id=$id'>";
+        echo "<meta http-equiv='refresh' content='0; url=verif?id=$id'>";
     }
 }
 

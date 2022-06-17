@@ -4,6 +4,7 @@ include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
 $id = $_GET['id'];
+$qry = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE r.id_rm = '$id'")->fetch_array();
 $query = $con->query("SELECT * FROM rm_obat ro JOIN rm r ON ro.id_rm = r.id_rm JOIN pasien p ON p.id_pasien = r.id_pasien WHERE ro.id_rm ='$id'");
 $row = $query->fetch_array();
 ?>
@@ -17,7 +18,9 @@ $row = $query->fetch_array();
                     <h4 class="m-0 text-dark"><i class="fa fa-pills ml-1 mr-1"></i> Tambah Data Obat</h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6 text-right">
-                    <a href="index" class="btn btn-xs bg-dark float-right"><i class="fa fa-stethoscope"> Data Rekam Medis</i></a>
+                    <a href="#id<?= $qry[0]; ?>" data-toggle="modal" class="btn bg-purple btn-xs mr-1" title="Detail"><i class="fa fa-info-circle mr-1"></i>Detail</a>
+                    <a href="index" class="btn btn-xs bg-dark float-right"><i class="fa fa-stethoscope mr-1"></i>Kembali</a>
+                    <?php include 'detail2.php' ?>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -72,8 +75,8 @@ $row = $query->fetch_array();
                             <div class="text-center">
                                 <p>
                                     <b>
-                                        Kode RM : <?= $row['id_rm'] ?><br>
-                                        Nama Pasien : <?= $row['nm_pasien'] ?>
+                                        Kode RM : <?= $qry['id_rm'] ?><br>
+                                        Nama Pasien : <?= $qry['nm_pasien'] ?>
                                     </b>
                                 </p>
                             </div>

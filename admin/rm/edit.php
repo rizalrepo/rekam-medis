@@ -4,9 +4,9 @@ include_once '../../template/header.php';
 include_once '../../template/sidebar.php';
 
 $id = $_GET['id'];
-$query = $con->query(" SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_rm ='$id'");
+$query = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_rm ='$id'");
 $row = $query->fetch_array();
-
+$qry = $con->query("SELECT * FROM rm r JOIN poli p ON p.id_poli = r.id_poli WHERE id_rm ='$id'")->fetch_array();
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -94,7 +94,7 @@ $row = $query->fetch_array();
                                             <?php
                                             $q = $con->query("SELECT * FROM poli ORDER BY id_poli DESC");
                                             while ($d = $q->fetch_array()) {
-                                                if ($d['id_poli'] == $row['id_poli']) {
+                                                if ($d['id_poli'] == $qry['id_poli']) {
                                             ?>
                                                     <option value="<?= $d['id_poli']; ?>" selected="<?= $d['id_poli']; ?>"><?= $d['nm_poli'] ?></option>
                                                 <?php
@@ -112,12 +112,6 @@ $row = $query->fetch_array();
                                     <label class="col-sm-2 col-form-label">Keluhan</label>
                                     <div class="col-sm-10">
                                         <textarea name="keluhan" class="form-control" required><?= $row['keluhan'] ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Diagnosis</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="diagnosis" class="form-control" required><?= $row['diagnosis'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -139,12 +133,6 @@ $row = $query->fetch_array();
                                             }
                                             ?>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tindak Lanjut</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="tindakan" class="form-control" required><?= $row['tindakan'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -247,9 +235,9 @@ if (isset($_POST['submit'])) {
     $tanggal = $_POST['tanggal'];
     $id_poli = $_POST['id_poli'];
     $keluhan = $_POST['keluhan'];
-    $diagnosis = $_POST['diagnosis'];
+
     $id_dokter = $_POST['id_dokter'];
-    $tindakan = $_POST['tindakan'];
+
 
 
     $update = $con->query("UPDATE rm SET 
@@ -257,9 +245,7 @@ if (isset($_POST['submit'])) {
         tanggal = '$tanggal',
         id_poli = '$id_poli',
         keluhan = '$keluhan',
-        diagnosis = '$diagnosis',
-        id_dokter = '$id_dokter',
-        tindakan = '$tindakan'
+        id_dokter = '$id_dokter'
         WHERE id_rm = '$id'
     ");
 

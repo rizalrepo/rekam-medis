@@ -110,12 +110,6 @@ $kode = $huruf . sprintf("%07s", $urutan);
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Diagnosis</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="diagnosis" class="form-control" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Nama Dokter</label>
                                     <div class="col-sm-10">
                                         <select name="id_dokter" class="form-control select2" style="width: 100%;">
@@ -125,12 +119,6 @@ $kode = $huruf . sprintf("%07s", $urutan);
                                                 <option value="<?= $row['id_dokter'] ?>"><?= $row['nm_dokter'] ?> | NIP. <?= $row['nip'] ?></option>
                                             <?php endforeach ?>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">Tindak Lanjut</label>
-                                    <div class="col-sm-10">
-                                        <textarea name="tindakan" class="form-control" required></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -245,10 +233,11 @@ if (isset($_POST['submit'])) {
         '$tanggal', 
         '$id_poli',
         '$keluhan',
-        '$diagnosis',
+        null,
         '$id_dokter',
-        '$tindakan',
-        '$user'
+        null,
+        '$user',
+        0
     )");
 
     if ($tambah) {

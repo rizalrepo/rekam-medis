@@ -40,6 +40,43 @@ $log = $con->query("SELECT * FROM user WHERE id_user = '$_SESSION[id_user]' ")->
                             <?php $_SESSION['pesan'] = '';
                             } ?>
                             <div class="table-responsive">
+                                <table class="table table-bordered table-striped dataTable">
+                                    <thead class="bg-olive">
+                                        <tr align="center">
+                                            <th>No</th>
+                                            <th>Kode RM</th>
+                                            <th>Nama Pasien</th>
+                                            <th>Waktu Periksa</th>
+                                            <th>Keluhan</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        $data = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_dokter = '$log[id_dokter]' AND verif = 0 ORDER BY id_rm DESC");
+                                        while ($row = $data->fetch_array()) {
+                                        ?>
+                                            <tr>
+                                                <td align="center" width="5%"><?= $no++ ?></td>
+                                                <td align="center"><?= $row['id_rm'] ?></td>
+                                                <td><?= $row['nm_pasien'] ?></td>
+                                                <td align="center"><?= tgl_indo($row['tanggal']) ?></td>
+                                                <td><?= $row['keluhan'] ?></td>
+                                                <td align="center" width="13%">
+                                                    <a href="#id<?= $row[0]; ?>" data-toggle="modal" class="btn bg-purple btn-xs" title="Detail"><i class="fa fa-info-circle"></i></a>
+                                                    <a href="verif?id=<?= $row[0] ?>" class="btn btn-info btn-xs" title="Verifikasi"><i class="fa fa-check-circle"></i></a>
+                                                    <?php include 'detail.php' ?>
+                                                </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="table-responsive">
                                 <table id="example1" class="table table-bordered table-striped dataTable">
                                     <thead class="bg-olive">
                                         <tr align="center">
@@ -57,7 +94,7 @@ $log = $con->query("SELECT * FROM user WHERE id_user = '$_SESSION[id_user]' ")->
                                     <tbody>
                                         <?php
                                         $no = 1;
-                                        $data = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_dokter = '$log[id_dokter]' ORDER BY id_rm DESC");
+                                        $data = $con->query("SELECT * FROM rm r JOIN pasien p ON p.id_pasien = r.id_pasien WHERE id_dokter = '$log[id_dokter]' AND verif = 1 ORDER BY id_rm DESC");
                                         while ($row = $data->fetch_array()) {
                                         ?>
                                             <tr>
