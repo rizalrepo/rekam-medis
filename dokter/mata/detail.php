@@ -25,6 +25,9 @@ if (mysqli_connect_errno()) {
                 <div class="modal-body">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <?php if ($d['verif'] == 1) { ?>
+                                <a href="<?= base_url() ?>/admin/fisik/surat?id=<?= $id ?>" class="btn btn-sm btn-primary" target="_blank"> <i class="fa fa-print"></i> Cetak Surat</a>
+                            <?php } ?>
                             <div class="card-body" style="text-align: left;">
                                 <dl class="row">
                                     <dt class="col-sm-3">Nama Pasien</dt>
