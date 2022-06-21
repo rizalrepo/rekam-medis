@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
         $pw = $row['password'];
     }
     if (!empty($_POST['level'])) {
-        $level = $_POST['password'];
+        $level = $_POST['level'];
     } else {
         $level = $row['level'];
     }
